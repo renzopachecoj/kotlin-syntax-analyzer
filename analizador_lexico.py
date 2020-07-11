@@ -17,6 +17,20 @@ reservados = {
     
     'if': 'IF', 
     'else': 'ELSE',
+
+    'val' : 'VAL',
+    'var' : 'VAR'
+}
+
+variables = {
+    'int' : 'INT',
+    'float' : 'FLOAT',
+    'boolean' : 'BOOLEAN',
+    'string' : 'STRING',
+    'list' : 'LIST',
+    'set' : 'SET',
+    'pair' : 'PAIR',
+    'triple' : 'TRIPLE'
 }
 
 simbolos = {
@@ -60,7 +74,7 @@ atributos = {
     'values': 'VALUES'
 }
 
-tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos.values()) + list(funciones.values()) +list(atributos.values())
+tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos.values()) + list(funciones.values()) +list(atributos.values()) + list(variables.values())
 
 t_NUMEROS = r'[0-9]+'
 t_FOR = r'for'
@@ -112,8 +126,22 @@ t_VALUES = r'values'
 
 t_ignore = r'   '
 
+t_VAL = r'val'
+t_VAR = r'var'
+
+t_INT = r'Int'
+t_FLOAT = r'Float'
+t_BOOLEAN = r'Boolean'
+
+t_STRING = r'String'
+t_PAIR = r'Pair'
+t_TRIPLE = r'Triple'
+t_SET = r'Set'
+t_LIST = r'List'
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
+
     if t.value in reservados:
         t.type = reservados.get(t.value, 'RESERVADOS')  # Verifica palabras reservadas
     if t.value in simbolos:
@@ -121,7 +149,14 @@ def t_ID(t):
     if t.value in funciones:
         t.type = funciones.get(t.value, 'FUNCIONES')
     if t.value in atributos:
-        t.type = atributos.get(t.value, 'ATRIBUTOS')
+        t.type = atributos.get(t.value, 'ATRIBUTOS')    
+    if t.value in variables:
+        t.type = variables.get(t.value, 'VARIABLES')    
+    return t
+
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
     return t
 
 def t_error(t):
