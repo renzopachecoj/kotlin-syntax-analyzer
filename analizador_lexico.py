@@ -12,11 +12,6 @@ reserved = {
     'var' : 'VAR'
 }
 
-simbolos = {
-    'comillaSimple' : 'COMILLASIMPLE',
-    'comillaDoble' : 'COMILLADOBLE'
-}
-
 variables = {
     'int' : 'INT',
     'float' : 'FLOAT',
@@ -48,9 +43,7 @@ t_ECHO = r'echo'
 t_WHILE = r'while'
 t_FOR = r'for'
 t_ELIF = r'elif'
-t_ignore = r'   ',
-t_COMILLASIMPLES = r"'"
-t_COMILLADOBLE = r'"'
+t_ignore = r'   '
 
 t_VAL = r'val'
 t_VAR = r'var'
