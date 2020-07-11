@@ -37,14 +37,15 @@ funciones = {
 }
 
 variables = {
-    'int' : 'INT',
-    'float' : 'FLOAT',
-    'boolean' : 'BOOLEAN',
-    'string' : 'STRING',
-    'list' : 'LIST',
-    'set' : 'SET',
-    'pair' : 'PAIR',
-    'triple' : 'TRIPLE'
+    'Int' : 'INT',
+    'Float' : 'FLOAT',
+    'Boolean' : 'BOOLEAN',
+    'String' : 'STRING',
+    'List' : 'LIST',
+    'Set' : 'SET',
+    'Pair' : 'PAIR',
+    'Triple' : 'TRIPLE',
+    'Array': 'ARRAY'
 }
 
 simbolos = [
@@ -89,14 +90,14 @@ tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
 t_NUMEROS = r'[0-9]+'
 
 t_IGUAL = r'='
-t_IGUALIGUAL = '=='
-t_TRIPLEIGUAL = '==='
-t_NOIGUAL = '!='
+t_IGUALIGUAL = r'=='
+t_TRIPLEIGUAL = r'==='
+t_NOIGUAL = r'!='
 t_NEGACION = '!'
 t_MAYOR = r'>'
 t_MENOR = r'<'
-t_MAYORIGUAL = '>='
-t_MENORIGUAL = '<='
+t_MAYORIGUAL = r'>='
+t_MENORIGUAL = r'<='
 
 t_SUMA = r'\+'
 t_RESTA = r'\-'
@@ -146,12 +147,12 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-cadena = ''' for( elements in arreglo ){
-        var x: Int = 1;
-        print("hola")
-        println(numbers.slice(0..4 step 2))
-    }
-    '''
+cadena = ''' 
+fun main(args: Array<String>) {
+    val pair: Pair<Int,String> = Pair(1, "x")
+    println("Pair = $pair")
+}
+'''
 
 analizadorL = lex.lex()
 analizadorL.input(cadena)
