@@ -15,7 +15,8 @@ reservados = {
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    'index': 'INDEX'
+    'index': 'INDEX',
+    'fun' : 'FUN'
 }
 
 funciones = {
@@ -35,14 +36,15 @@ funciones = {
 }
 
 variables = {
-    'int' : 'INT',
-    'float' : 'FLOAT',
-    'boolean' : 'BOOLEAN',
-    'string' : 'STRING',
-    'list' : 'LIST',
-    'set' : 'SET',
-    'pair' : 'PAIR',
-    'triple' : 'TRIPLE'
+    'Int' : 'INT',
+    'Float' : 'FLOAT',
+    'Boolean' : 'BOOLEAN',
+    'String' : 'STRING',
+    'List' : 'LIST',
+    'Set' : 'SET',
+    'Pair' : 'PAIR',
+    'Triple' : 'TRIPLE',
+    'Array': 'ARRAY'
 }
 
 simbolos = [
@@ -75,7 +77,10 @@ simbolos = [
     'COMA',
     'ARROBA',
     'COMSIMPLE',
-    'COMDOBLE'
+    'COMDOBLE',
+    'SIGNODOLAR',
+    'INICIOCOMENTARIO',
+    'PREGUNTA'
 ]
 
 tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
@@ -84,14 +89,14 @@ tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
 t_NUMEROS = r'[0-9]+'
 
 t_IGUAL = r'='
-t_IGUALIGUAL = '=='
-t_TRIPLEIGUAL = '==='
-t_NOIGUAL = '!='
+t_IGUALIGUAL = r'=='
+t_TRIPLEIGUAL = r'==='
+t_NOIGUAL = r'!='
 t_NEGACION = '!'
 t_MAYOR = r'>'
 t_MENOR = r'<'
-t_MAYORIGUAL = '>='
-t_MENORIGUAL = '<='
+t_MAYORIGUAL = r'>='
+t_MENORIGUAL = r'<='
 
 t_SUMA = r'\+'
 t_RESTA = r'\-'
@@ -114,6 +119,9 @@ t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
 t_ARROBA = r'@'
+t_SIGNODOLAR = r'\$'
+t_INICIOCOMENTARIO = r'//'
+t_PREGUNTA = r'\?'
 
 t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'

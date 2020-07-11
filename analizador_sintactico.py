@@ -4,28 +4,15 @@ import analizador_lexico
 
 lexer = lex.lex(module=analizador_lexico)
 
-cadena = ''' for( elements in arreglo ){
-        var x: Int = 1;
-        print("hola")
-        println(numbers.slice(0..4 step 2))
-    }
+cadena = ''' 
+        println(numbers.slice(1..3))
     '''
-
-analizadorL = lex.lex()
-analizadorL.input(cadena)
-
-while True:
-    tokenRec = analizadorL.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
-
-
 lexer.input(cadena)
 
 while True:
     tok = lexer.token()
-    if not tok:
+    if tok!=None:
+        print(tok)
+        # print(tok.type, tok.value, tok.lineno, tok.lexpos)
+    else:
         break
-    print(tok.type, tok.value, tok.lineno, tok.lexpos)
