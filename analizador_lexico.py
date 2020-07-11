@@ -6,12 +6,31 @@ reserved = {
     'else' : 'ELSE',
     'while' : 'WHILE',
     'for' : 'FOR',
-    'echo' : 'ECHO'
+    'echo' : 'ECHO',
+
+    'val' : 'VAL',
+    'var' : 'VAR'
+}
+
+simbolos = {
+    'comillaSimple' : 'COMILLASIMPLE',
+    'comillaDoble' : 'COMILLADOBLE'
+}
+
+variables = {
+    'int' : 'INT',
+    'float' : 'FLOAT',
+    'boolean' : 'BOOLEAN',
+    'string' : 'STRING',
+    'list' : 'LIST',
+    'set' : 'SET',
+    'pair' : 'PAIR',
+    'triple' : 'TRIPLE'
 }
 
 tokens = ["MENOS", "MAS", "PRODUCTO", "DIVISION",
           "NUMEROS", "LPAREN", "RPAREN", "IGUAL", "POTENCIA",
-          "ID", "COMPARA", "PUNTOS"] + list(reserved.values())
+          "ID", "COMPARA", "PUNTOS"] + list(reserved.values()) + list(variables.values()) + list(simbolos.values())
 
 t_MENOS = r'-'
 t_MAS = r'\+'
@@ -29,11 +48,33 @@ t_ECHO = r'echo'
 t_WHILE = r'while'
 t_FOR = r'for'
 t_ELIF = r'elif'
-t_ignore = r'   '
+t_ignore = r'   ',
+t_COMILLASIMPLES = r"'"
+t_COMILLADOBLE = r'"'
+
+t_VAL = r'val'
+t_VAR = r'var'
+
+t_INT = r'Int'
+t_FLOAT = r'Float'
+t_BOOLEAN = r'Boolean'
+
+t_STRING = r'String'
+t_PAIR = r'Pair'
+t_TRIPLE = r'Triple'
+t_SET = r'Set'
+t_LIST = r'List'
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
+    if t.value in variables:
+        t.type = variables.get(t.value, 'VARIABLES')    
+    return t
+
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
     return t
 
 def t_error(t):
