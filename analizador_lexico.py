@@ -16,7 +16,8 @@ reservados = {
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    'index': 'INDEX'
+    'index': 'INDEX',
+    'fun' : 'FUN'
 }
 
 funciones = {
@@ -76,7 +77,10 @@ simbolos = [
     'COMA',
     'ARROBA',
     'COMSIMPLE',
-    'COMDOBLE'
+    'COMDOBLE',
+    'SIGNODOLAR',
+    'INICIOCOMENTARIO',
+    'PREGUNTA'
 ]
 
 tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
@@ -115,6 +119,9 @@ t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
 t_ARROBA = r'@'
+t_SIGNODOLAR = r'\$'
+t_INICIOCOMENTARIO = r'//'
+t_PREGUNTA = r'\?'
 
 t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'
