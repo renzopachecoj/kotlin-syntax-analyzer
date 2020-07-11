@@ -1,65 +1,27 @@
+import ply.lex as lex
+
 reservados = {
+    'val': 'VAL',
+    'var': 'VAR',
+    'true': 'TRUE',
+    'false': 'FALSE',
     'for': 'FOR',
+    'while': 'WHILE',
+    'if': 'IF',
+    'else': 'ELSE',
+    'break': 'BREAK',
+    'outer': 'OUTER',
+    'continue': 'CONTINUE',
     'in': 'IN',
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    'index': 'INDEX',
-    'value': 'VALUE',
-    'key': 'KEY',
-
-    'while': 'WHILE',
-    'break': 'BREAK',
-    'outer': 'OUTER',
-    'continue': 'CONTINUE',
-
-    'if': 'IF',
-    'else': 'ELSE',
-
-
-
-    'true': 'TRUE', #todo esto es MIOOOOOOOOOOOOOOOOOOO
-    'false': 'FALSE'
-}
-
-symbols = [
-    'MAYOR',
-    'MENOR',
-    'MAYORIGUAL',
-    'MENORIGUAL',
-    'IGUALIGUAL',
-    'TRIPLEIGUAL',
-    'NOIGUAL',
-    'NEGACION',
-    'SUMA',
-    'RESTA',
-    'DIV',
-    'MULT',
-    'MODULO',
-    'AND',
-    'OR'
-]
-simbolos = {
-    'apar': 'APAR',
-    'cpar': 'CPAR',
-    'allave': 'ALLAVE',
-    'cllave': 'CLLAVE',
-    'acor': 'ACOR',
-    'ccor': 'CCOR',
-    'punto': 'PUNTO',
-    #considerar doble punto
-    'puntocoma': 'PUNTOCOMA',
-    'coma': 'COMA',
-    'igual': 'IGUAL',
-    'arroba': 'ARROBA',
-    'comsimple': "COMSIMP",
-    'comdoble': "COMDOBLE"
+    'index': 'INDEX'
 }
 
 funciones = {
     'withIndex': 'WITHINDEX',
     'get': 'GET',
-    'set': 'SET',
     'slice': 'SLICE',
     'compareTo': 'COMPARETO',
     'getIndex': 'GETINDEX',
@@ -68,35 +30,78 @@ funciones = {
     'size': 'SIZE',
     'isEmpty': 'ISEMPTY',
     'toString': 'TOSTRING',
-    'toList': 'TOLIST'
+    'toList': 'TOLIST',
+    'print': 'PRINT',
+    'println': 'PRINTLN'
 }
 
-atributos = {
-    'keys': 'KEYS',
-    'values': 'VALUES'
+variables = {
+    'int' : 'INT',
+    'float' : 'FLOAT',
+    'boolean' : 'BOOLEAN',
+    'string' : 'STRING',
+    'list' : 'LIST',
+    'set' : 'SET',
+    'pair' : 'PAIR',
+    'triple' : 'TRIPLE'
 }
 
-tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos.values()) + list(funciones.values()) +list(atributos.values()) + symbols
+simbolos = [
+    'IGUAL',
+    'IGUALIGUAL',
+    'TRIPLEIGUAL',
+    'NOIGUAL',
+    'NEGACION',
+    'MAYOR',
+    'MENOR',
+    'MAYORIGUAL',
+    'MENORIGUAL',
+    'SUMA',
+    'RESTA',
+    'DIVISION',
+    'MULT',
+    'MODULO',
+    'AND',
+    'OR',
+    'APAR',
+    'CPAR',
+    'ALLAVE',
+    'CLLAVE',
+    'ACOR',
+    'CCOR',
+    'PUNTO',
+    'DOSPUNTOS',
+    'PUNTOPUNTO',
+    'PUNTOCOMA',
+    'COMA',
+    'ARROBA',
+    'COMSIMPLE',
+    'COMDOBLE'
+]
 
-
+tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
+         + list(funciones.values()) + list(variables.values())
 
 t_NUMEROS = r'[0-9]+'
-t_FOR = r'for'
-t_IN = r'int'
-t_UNTIL = r'until'
-t_STEP = r'step'
-t_DOWNTO = r'downto'
-t_INDEX = r'index'
-t_VALUE = r'value'
-t_KEY = r'key'
-t_WHILE = r'while'
-t_BREAK = r'break'
-t_OUTER = r'outer'
-t_CONTINUE = r'continue'
-t_IF = r'if'
-t_ELSE = r'else'
 
+t_IGUAL = r'='
+t_IGUALIGUAL = '=='
+t_TRIPLEIGUAL = '==='
+t_NOIGUAL = '!='
+t_NEGACION = '!'
+t_MAYOR = r'>'
+t_MENOR = r'<'
+t_MAYORIGUAL = '>='
+t_MENORIGUAL = '<='
 
+t_SUMA = r'\+'
+t_RESTA = r'\-'
+t_DIVISION = r'/'
+t_MULT = r'\*'
+t_MODULO = r'%'
+
+t_AND = r'&&'
+t_OR = r'\|\|'
 
 t_APAR = r'\('
 t_CPAR = r'\)'
@@ -105,62 +110,25 @@ t_CLLAVE = r'}'
 t_ACOR = r'\['
 t_CCOR = r'\]'
 t_PUNTO = r'\.'
+t_PUNTOPUNTO = r'\.\.'
+t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
-t_IGUAL = r'='
 t_ARROBA = r'@'
-t_COMSIMP = r'\''
+
+t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'
 
-
-
-
-#MIOOOOO
-t_MAYOR = r'>'
-t_MENOR = r'<'
-t_TRIPLEIGUAL = '==='
-t_MAYORIGUAL = '<='
-t_MENORIGUAL = '<='
-t_IGUALIGUAL = '=='
-t_NOIGUAL = '!='
-t_NEGACION = '!'
-t_SUMA = r'\+'
-t_RESTA = r'\-'
-t_DIV = r'/'
-t_MULT = r'\*'
-t_MODULO = r'%'
-t_AND = r'&&'
-t_OR = r'\|\|'
-
-
-t_WITHINDEX = r'withIndex'
-t_GET = r'get'
-t_SET = r'set'
-t_SLICE = r'slice'
-t_COMPARETO = r'compareTo'
-t_GETINDEX = r'getIndex'
-t_HASHCODE = r'hashCode'
-t_CONTAINS = r'contains'
-t_SIZE = r'size'
-t_ISEMPTY = r'isEmpty'
-t_TOSTRING = r'toString'
-t_TOLIST = r'toList'
-
-t_KEYS = r'keys'
-t_VALUES = r'values'
-
-t_ignore = r' '
+t_ignore = ' \t'
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     if t.value in reservados:
         t.type = reservados.get(t.value, 'RESERVADOS')  # Verifica palabras reservadas
-    if t.value in simbolos:
-        t.type = simbolos.get(t.value, 'SIMBOLOS')
     if t.value in funciones:
         t.type = funciones.get(t.value, 'FUNCIONES')
-    if t.value in atributos:
-        t.type = atributos.get(t.value, 'ATRIBUTOS')
+    if t.value in variables:
+        t.type = variables.get(t.value, 'VARIABLES')    
     return t
 
 def t_error(t):
@@ -170,3 +138,20 @@ def t_error(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
+cadena = ''' for( elements in arreglo ){
+        var x: Int = 1;
+        print("hola")
+        println(numbers.slice(0..4 step 2))
+    }
+    '''
+
+analizadorL = lex.lex()
+analizadorL.input(cadena)
+
+while True:
+    tokenRec = analizadorL.token()
+    if tokenRec!=None:
+        print(tokenRec)
+    else:
+        break
