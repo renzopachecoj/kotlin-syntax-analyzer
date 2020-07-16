@@ -1,0 +1,1921 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ACOR
+    ARRAY
+    ARROBA
+    BOOLEAN
+    BREAK
+    CCOR
+    COMPARETO
+    COMSIMPLE
+    CONTAINS
+    DIVISION
+    FALSE
+    FLOAT
+    FUN
+    GET
+    GETINDEX
+    HASHCODE
+    INDEX
+    INICIOCOMENTARIO
+    ISEMPTY
+    LIST
+    MODULO
+    MULT
+    NEGACION
+    PAIR
+    PREGUNTA
+    PRINT
+    PUNTOCOMA
+    RESTA
+    SET
+    SIGNODOLAR
+    SIZE
+    SLICE
+    STRING
+    TOLIST
+    TOSTRING
+    TRIPLE
+    TRUE
+
+Grammar
+
+Rule 0     S' -> sentencia
+Rule 1     sentencia -> asignacion
+Rule 2     sentencia -> expresion
+Rule 3     sentencia -> metodo
+Rule 4     sentencia -> control
+Rule 5     sentencia -> condicion
+Rule 6     asignacion -> VAL ID IGUAL NUMEROS
+Rule 7     asignacion -> VAR ID IGUAL NUMEROS
+Rule 8     expresion -> NUMEROS SUMA NUMEROS
+Rule 9     expresion -> PRINTLN APAR COMDOBLE ID CPAR
+Rule 10    expresion -> PRINTLN APAR ID CPAR
+Rule 11    metodo -> ID PUNTO ID
+Rule 12    comparador -> IGUALIGUAL
+Rule 13    comparador -> TRIPLEIGUAL
+Rule 14    comparador -> NOIGUAL
+Rule 15    comparador -> MAYOR
+Rule 16    comparador -> MENOR
+Rule 17    comparador -> MAYORIGUAL
+Rule 18    comparador -> MENORIGUAL
+Rule 19    conector -> AND
+Rule 20    conector -> OR
+Rule 21    condicion -> NUMEROS comparador NUMEROS
+Rule 22    condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+Rule 23    control -> if
+Rule 24    control -> for
+Rule 25    control -> while
+Rule 26    cuerpo -> sentencia
+Rule 27    cuerpo -> ALLAVE sentencia CLLAVE
+Rule 28    if -> IF APAR condicion CPAR cuerpo
+Rule 29    if -> IF APAR condicion CPAR cuerpo ELSE cuerpo
+Rule 30    for -> FOR APAR ID IN ID CPAR cuerpo
+Rule 31    for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+Rule 32    for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+Rule 33    for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+Rule 34    for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+Rule 35    for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+Rule 36    for -> FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+Rule 37    for -> FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+Rule 38    for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+Rule 39    for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+Rule 40    while -> WHILE condicion cuerpo
+
+Terminals, with rules where they appear
+
+ACOR                 : 
+ALLAVE               : 27
+AND                  : 19
+APAR                 : 9 10 28 29 30 31 32 33 34 35 36 37 38 38 38 39 39
+ARRAY                : 
+ARROBA               : 
+BOOLEAN              : 
+BREAK                : 
+CCOR                 : 
+CLLAVE               : 27
+COMA                 : 38 39
+COMDOBLE             : 9
+COMPARETO            : 
+COMSIMPLE            : 
+CONTAINS             : 
+CPAR                 : 9 10 28 29 30 31 32 33 34 35 36 37 38 38 38 39 39
+DIVISION             : 
+DOSPUNTOS            : 31
+DOWNTO               : 35
+ELSE                 : 29
+FALSE                : 
+FLOAT                : 
+FOR                  : 30 31 32 33 34 35 36 37 38 39
+FUN                  : 
+GET                  : 
+GETINDEX             : 
+HASHCODE             : 
+ID                   : 6 7 9 10 11 11 30 30 31 31 32 33 34 35 36 36 37 37 37 38 38 38 39 39 39
+IF                   : 28 29
+IGUAL                : 6 7
+IGUALIGUAL           : 12
+IN                   : 30 31 32 33 34 35 36 37 38 39
+INDEX                : 
+INDICES              : 36
+INICIOCOMENTARIO     : 
+INT                  : 31
+ISEMPTY              : 
+LIST                 : 
+MAYOR                : 15
+MAYORIGUAL           : 17
+MENOR                : 16
+MENORIGUAL           : 18
+MODULO               : 
+MULT                 : 
+NEGACION             : 
+NOIGUAL              : 14
+NUMEROS              : 6 7 8 8 21 21 22 22 22 22 32 32 33 33 34 34 34 35 35 35
+OR                   : 20
+PAIR                 : 
+PREGUNTA             : 
+PRINT                : 
+PRINTLN              : 9 10
+PUNTO                : 11 36 37 38
+PUNTOCOMA            : 
+PUNTOPUNTO           : 32
+RESTA                : 
+SET                  : 
+SIGNODOLAR           : 
+SIZE                 : 
+SLICE                : 
+STEP                 : 34 35
+STRING               : 
+SUMA                 : 8
+TOLIST               : 
+TOSTRING             : 
+TRIPLE               : 
+TRIPLEIGUAL          : 13
+TRUE                 : 
+UNTIL                : 33 34
+VAL                  : 6
+VAR                  : 7
+WHILE                : 40
+WITHINDEX            : 38
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 1
+comparador           : 21 22 22
+condicion            : 5 28 29 40
+conector             : 22
+control              : 4
+cuerpo               : 28 29 29 30 31 32 33 34 35 36 37 38 39 40
+expresion            : 2
+for                  : 24
+if                   : 23
+metodo               : 3
+sentencia            : 26 27 0
+while                : 25
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentencia
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    sentencia                      shift and go to state 1
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 1
+
+    (0) S' -> sentencia .
+
+
+
+state 2
+
+    (1) sentencia -> asignacion .
+
+    $end            reduce using rule 1 (sentencia -> asignacion .)
+    CLLAVE          reduce using rule 1 (sentencia -> asignacion .)
+    ELSE            reduce using rule 1 (sentencia -> asignacion .)
+
+
+state 3
+
+    (2) sentencia -> expresion .
+
+    $end            reduce using rule 2 (sentencia -> expresion .)
+    CLLAVE          reduce using rule 2 (sentencia -> expresion .)
+    ELSE            reduce using rule 2 (sentencia -> expresion .)
+
+
+state 4
+
+    (3) sentencia -> metodo .
+
+    $end            reduce using rule 3 (sentencia -> metodo .)
+    CLLAVE          reduce using rule 3 (sentencia -> metodo .)
+    ELSE            reduce using rule 3 (sentencia -> metodo .)
+
+
+state 5
+
+    (4) sentencia -> control .
+
+    $end            reduce using rule 4 (sentencia -> control .)
+    CLLAVE          reduce using rule 4 (sentencia -> control .)
+    ELSE            reduce using rule 4 (sentencia -> control .)
+
+
+state 6
+
+    (5) sentencia -> condicion .
+
+    $end            reduce using rule 5 (sentencia -> condicion .)
+    CLLAVE          reduce using rule 5 (sentencia -> condicion .)
+    ELSE            reduce using rule 5 (sentencia -> condicion .)
+
+
+state 7
+
+    (6) asignacion -> VAL . ID IGUAL NUMEROS
+
+    ID              shift and go to state 18
+
+
+state 8
+
+    (11) metodo -> ID . PUNTO ID
+
+    PUNTO           shift and go to state 19
+
+
+state 9
+
+    (8) expresion -> NUMEROS . SUMA NUMEROS
+    (21) condicion -> NUMEROS . comparador NUMEROS
+    (22) condicion -> NUMEROS . comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (12) comparador -> . IGUALIGUAL
+    (13) comparador -> . TRIPLEIGUAL
+    (14) comparador -> . NOIGUAL
+    (15) comparador -> . MAYOR
+    (16) comparador -> . MENOR
+    (17) comparador -> . MAYORIGUAL
+    (18) comparador -> . MENORIGUAL
+
+    SUMA            shift and go to state 20
+    IGUALIGUAL      shift and go to state 22
+    TRIPLEIGUAL     shift and go to state 23
+    NOIGUAL         shift and go to state 24
+    MAYOR           shift and go to state 25
+    MENOR           shift and go to state 26
+    MAYORIGUAL      shift and go to state 27
+    MENORIGUAL      shift and go to state 28
+
+    comparador                     shift and go to state 21
+
+state 10
+
+    (7) asignacion -> VAR . ID IGUAL NUMEROS
+
+    ID              shift and go to state 29
+
+
+state 11
+
+    (9) expresion -> PRINTLN . APAR COMDOBLE ID CPAR
+    (10) expresion -> PRINTLN . APAR ID CPAR
+
+    APAR            shift and go to state 30
+
+
+state 12
+
+    (23) control -> if .
+
+    $end            reduce using rule 23 (control -> if .)
+    CLLAVE          reduce using rule 23 (control -> if .)
+    ELSE            reduce using rule 23 (control -> if .)
+
+
+state 13
+
+    (24) control -> for .
+
+    $end            reduce using rule 24 (control -> for .)
+    CLLAVE          reduce using rule 24 (control -> for .)
+    ELSE            reduce using rule 24 (control -> for .)
+
+
+state 14
+
+    (25) control -> while .
+
+    $end            reduce using rule 25 (control -> while .)
+    CLLAVE          reduce using rule 25 (control -> while .)
+    ELSE            reduce using rule 25 (control -> while .)
+
+
+state 15
+
+    (28) if -> IF . APAR condicion CPAR cuerpo
+    (29) if -> IF . APAR condicion CPAR cuerpo ELSE cuerpo
+
+    APAR            shift and go to state 31
+
+
+state 16
+
+    (30) for -> FOR . APAR ID IN ID CPAR cuerpo
+    (31) for -> FOR . APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> FOR . APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> FOR . APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> FOR . APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> FOR . APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> FOR . APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> FOR . APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> FOR . APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR . APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+
+    APAR            shift and go to state 32
+
+
+state 17
+
+    (40) while -> WHILE . condicion cuerpo
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+
+    NUMEROS         shift and go to state 34
+
+    condicion                      shift and go to state 33
+
+state 18
+
+    (6) asignacion -> VAL ID . IGUAL NUMEROS
+
+    IGUAL           shift and go to state 35
+
+
+state 19
+
+    (11) metodo -> ID PUNTO . ID
+
+    ID              shift and go to state 36
+
+
+state 20
+
+    (8) expresion -> NUMEROS SUMA . NUMEROS
+
+    NUMEROS         shift and go to state 37
+
+
+state 21
+
+    (21) condicion -> NUMEROS comparador . NUMEROS
+    (22) condicion -> NUMEROS comparador . NUMEROS conector NUMEROS comparador NUMEROS
+
+    NUMEROS         shift and go to state 38
+
+
+state 22
+
+    (12) comparador -> IGUALIGUAL .
+
+    NUMEROS         reduce using rule 12 (comparador -> IGUALIGUAL .)
+
+
+state 23
+
+    (13) comparador -> TRIPLEIGUAL .
+
+    NUMEROS         reduce using rule 13 (comparador -> TRIPLEIGUAL .)
+
+
+state 24
+
+    (14) comparador -> NOIGUAL .
+
+    NUMEROS         reduce using rule 14 (comparador -> NOIGUAL .)
+
+
+state 25
+
+    (15) comparador -> MAYOR .
+
+    NUMEROS         reduce using rule 15 (comparador -> MAYOR .)
+
+
+state 26
+
+    (16) comparador -> MENOR .
+
+    NUMEROS         reduce using rule 16 (comparador -> MENOR .)
+
+
+state 27
+
+    (17) comparador -> MAYORIGUAL .
+
+    NUMEROS         reduce using rule 17 (comparador -> MAYORIGUAL .)
+
+
+state 28
+
+    (18) comparador -> MENORIGUAL .
+
+    NUMEROS         reduce using rule 18 (comparador -> MENORIGUAL .)
+
+
+state 29
+
+    (7) asignacion -> VAR ID . IGUAL NUMEROS
+
+    IGUAL           shift and go to state 39
+
+
+state 30
+
+    (9) expresion -> PRINTLN APAR . COMDOBLE ID CPAR
+    (10) expresion -> PRINTLN APAR . ID CPAR
+
+    COMDOBLE        shift and go to state 40
+    ID              shift and go to state 41
+
+
+state 31
+
+    (28) if -> IF APAR . condicion CPAR cuerpo
+    (29) if -> IF APAR . condicion CPAR cuerpo ELSE cuerpo
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+
+    NUMEROS         shift and go to state 34
+
+    condicion                      shift and go to state 42
+
+state 32
+
+    (30) for -> FOR APAR . ID IN ID CPAR cuerpo
+    (31) for -> FOR APAR . ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> FOR APAR . ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> FOR APAR . ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> FOR APAR . ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> FOR APAR . ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> FOR APAR . ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> FOR APAR . ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> FOR APAR . APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR . APAR ID COMA ID CPAR IN ID CPAR cuerpo
+
+    ID              shift and go to state 44
+    APAR            shift and go to state 43
+
+
+state 33
+
+    (40) while -> WHILE condicion . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    condicion                      shift and go to state 6
+    cuerpo                         shift and go to state 45
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 34
+
+    (21) condicion -> NUMEROS . comparador NUMEROS
+    (22) condicion -> NUMEROS . comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (12) comparador -> . IGUALIGUAL
+    (13) comparador -> . TRIPLEIGUAL
+    (14) comparador -> . NOIGUAL
+    (15) comparador -> . MAYOR
+    (16) comparador -> . MENOR
+    (17) comparador -> . MAYORIGUAL
+    (18) comparador -> . MENORIGUAL
+
+    IGUALIGUAL      shift and go to state 22
+    TRIPLEIGUAL     shift and go to state 23
+    NOIGUAL         shift and go to state 24
+    MAYOR           shift and go to state 25
+    MENOR           shift and go to state 26
+    MAYORIGUAL      shift and go to state 27
+    MENORIGUAL      shift and go to state 28
+
+    comparador                     shift and go to state 21
+
+state 35
+
+    (6) asignacion -> VAL ID IGUAL . NUMEROS
+
+    NUMEROS         shift and go to state 48
+
+
+state 36
+
+    (11) metodo -> ID PUNTO ID .
+
+    $end            reduce using rule 11 (metodo -> ID PUNTO ID .)
+    CLLAVE          reduce using rule 11 (metodo -> ID PUNTO ID .)
+    ELSE            reduce using rule 11 (metodo -> ID PUNTO ID .)
+
+
+state 37
+
+    (8) expresion -> NUMEROS SUMA NUMEROS .
+
+    $end            reduce using rule 8 (expresion -> NUMEROS SUMA NUMEROS .)
+    CLLAVE          reduce using rule 8 (expresion -> NUMEROS SUMA NUMEROS .)
+    ELSE            reduce using rule 8 (expresion -> NUMEROS SUMA NUMEROS .)
+
+
+state 38
+
+    (21) condicion -> NUMEROS comparador NUMEROS .
+    (22) condicion -> NUMEROS comparador NUMEROS . conector NUMEROS comparador NUMEROS
+    (19) conector -> . AND
+    (20) conector -> . OR
+
+    $end            reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    ALLAVE          reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    VAL             reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    VAR             reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    NUMEROS         reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    PRINTLN         reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    ID              reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    IF              reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    FOR             reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    WHILE           reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    CPAR            reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    CLLAVE          reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    ELSE            reduce using rule 21 (condicion -> NUMEROS comparador NUMEROS .)
+    AND             shift and go to state 50
+    OR              shift and go to state 51
+
+    conector                       shift and go to state 49
+
+state 39
+
+    (7) asignacion -> VAR ID IGUAL . NUMEROS
+
+    NUMEROS         shift and go to state 52
+
+
+state 40
+
+    (9) expresion -> PRINTLN APAR COMDOBLE . ID CPAR
+
+    ID              shift and go to state 53
+
+
+state 41
+
+    (10) expresion -> PRINTLN APAR ID . CPAR
+
+    CPAR            shift and go to state 54
+
+
+state 42
+
+    (28) if -> IF APAR condicion . CPAR cuerpo
+    (29) if -> IF APAR condicion . CPAR cuerpo ELSE cuerpo
+
+    CPAR            shift and go to state 55
+
+
+state 43
+
+    (38) for -> FOR APAR APAR . ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR . ID COMA ID CPAR IN ID CPAR cuerpo
+
+    ID              shift and go to state 56
+
+
+state 44
+
+    (30) for -> FOR APAR ID . IN ID CPAR cuerpo
+    (31) for -> FOR APAR ID . DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> FOR APAR ID . IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> FOR APAR ID . IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> FOR APAR ID . IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> FOR APAR ID . IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> FOR APAR ID . IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> FOR APAR ID . IN ID PUNTO ID CPAR cuerpo
+
+    IN              shift and go to state 57
+    DOSPUNTOS       shift and go to state 58
+
+
+state 45
+
+    (40) while -> WHILE condicion cuerpo .
+
+    $end            reduce using rule 40 (while -> WHILE condicion cuerpo .)
+    CLLAVE          reduce using rule 40 (while -> WHILE condicion cuerpo .)
+    ELSE            reduce using rule 40 (while -> WHILE condicion cuerpo .)
+
+
+state 46
+
+    (26) cuerpo -> sentencia .
+
+    $end            reduce using rule 26 (cuerpo -> sentencia .)
+    CLLAVE          reduce using rule 26 (cuerpo -> sentencia .)
+    ELSE            reduce using rule 26 (cuerpo -> sentencia .)
+
+
+state 47
+
+    (27) cuerpo -> ALLAVE . sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    sentencia                      shift and go to state 59
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 48
+
+    (6) asignacion -> VAL ID IGUAL NUMEROS .
+
+    $end            reduce using rule 6 (asignacion -> VAL ID IGUAL NUMEROS .)
+    CLLAVE          reduce using rule 6 (asignacion -> VAL ID IGUAL NUMEROS .)
+    ELSE            reduce using rule 6 (asignacion -> VAL ID IGUAL NUMEROS .)
+
+
+state 49
+
+    (22) condicion -> NUMEROS comparador NUMEROS conector . NUMEROS comparador NUMEROS
+
+    NUMEROS         shift and go to state 60
+
+
+state 50
+
+    (19) conector -> AND .
+
+    NUMEROS         reduce using rule 19 (conector -> AND .)
+
+
+state 51
+
+    (20) conector -> OR .
+
+    NUMEROS         reduce using rule 20 (conector -> OR .)
+
+
+state 52
+
+    (7) asignacion -> VAR ID IGUAL NUMEROS .
+
+    $end            reduce using rule 7 (asignacion -> VAR ID IGUAL NUMEROS .)
+    CLLAVE          reduce using rule 7 (asignacion -> VAR ID IGUAL NUMEROS .)
+    ELSE            reduce using rule 7 (asignacion -> VAR ID IGUAL NUMEROS .)
+
+
+state 53
+
+    (9) expresion -> PRINTLN APAR COMDOBLE ID . CPAR
+
+    CPAR            shift and go to state 61
+
+
+state 54
+
+    (10) expresion -> PRINTLN APAR ID CPAR .
+
+    $end            reduce using rule 10 (expresion -> PRINTLN APAR ID CPAR .)
+    CLLAVE          reduce using rule 10 (expresion -> PRINTLN APAR ID CPAR .)
+    ELSE            reduce using rule 10 (expresion -> PRINTLN APAR ID CPAR .)
+
+
+state 55
+
+    (28) if -> IF APAR condicion CPAR . cuerpo
+    (29) if -> IF APAR condicion CPAR . cuerpo ELSE cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    condicion                      shift and go to state 6
+    cuerpo                         shift and go to state 62
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 56
+
+    (38) for -> FOR APAR APAR ID . COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID . COMA ID CPAR IN ID CPAR cuerpo
+
+    COMA            shift and go to state 63
+
+
+state 57
+
+    (30) for -> FOR APAR ID IN . ID CPAR cuerpo
+    (32) for -> FOR APAR ID IN . NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> FOR APAR ID IN . NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> FOR APAR ID IN . NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> FOR APAR ID IN . NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> FOR APAR ID IN . ID PUNTO INDICES CPAR cuerpo
+    (37) for -> FOR APAR ID IN . ID PUNTO ID CPAR cuerpo
+
+    ID              shift and go to state 64
+    NUMEROS         shift and go to state 65
+
+
+state 58
+
+    (31) for -> FOR APAR ID DOSPUNTOS . INT IN ID CPAR cuerpo
+
+    INT             shift and go to state 66
+
+
+state 59
+
+    (27) cuerpo -> ALLAVE sentencia . CLLAVE
+
+    CLLAVE          shift and go to state 67
+
+
+state 60
+
+    (22) condicion -> NUMEROS comparador NUMEROS conector NUMEROS . comparador NUMEROS
+    (12) comparador -> . IGUALIGUAL
+    (13) comparador -> . TRIPLEIGUAL
+    (14) comparador -> . NOIGUAL
+    (15) comparador -> . MAYOR
+    (16) comparador -> . MENOR
+    (17) comparador -> . MAYORIGUAL
+    (18) comparador -> . MENORIGUAL
+
+    IGUALIGUAL      shift and go to state 22
+    TRIPLEIGUAL     shift and go to state 23
+    NOIGUAL         shift and go to state 24
+    MAYOR           shift and go to state 25
+    MENOR           shift and go to state 26
+    MAYORIGUAL      shift and go to state 27
+    MENORIGUAL      shift and go to state 28
+
+    comparador                     shift and go to state 68
+
+state 61
+
+    (9) expresion -> PRINTLN APAR COMDOBLE ID CPAR .
+
+    $end            reduce using rule 9 (expresion -> PRINTLN APAR COMDOBLE ID CPAR .)
+    CLLAVE          reduce using rule 9 (expresion -> PRINTLN APAR COMDOBLE ID CPAR .)
+    ELSE            reduce using rule 9 (expresion -> PRINTLN APAR COMDOBLE ID CPAR .)
+
+
+state 62
+
+    (28) if -> IF APAR condicion CPAR cuerpo .
+    (29) if -> IF APAR condicion CPAR cuerpo . ELSE cuerpo
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    $end            reduce using rule 28 (if -> IF APAR condicion CPAR cuerpo .)
+    CLLAVE          reduce using rule 28 (if -> IF APAR condicion CPAR cuerpo .)
+    ELSE            shift and go to state 69
+
+  ! ELSE            [ reduce using rule 28 (if -> IF APAR condicion CPAR cuerpo .) ]
+
+
+state 63
+
+    (38) for -> FOR APAR APAR ID COMA . ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID COMA . ID CPAR IN ID CPAR cuerpo
+
+    ID              shift and go to state 70
+
+
+state 64
+
+    (30) for -> FOR APAR ID IN ID . CPAR cuerpo
+    (36) for -> FOR APAR ID IN ID . PUNTO INDICES CPAR cuerpo
+    (37) for -> FOR APAR ID IN ID . PUNTO ID CPAR cuerpo
+
+    CPAR            shift and go to state 71
+    PUNTO           shift and go to state 72
+
+
+state 65
+
+    (32) for -> FOR APAR ID IN NUMEROS . PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> FOR APAR ID IN NUMEROS . UNTIL NUMEROS CPAR cuerpo
+    (34) for -> FOR APAR ID IN NUMEROS . UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> FOR APAR ID IN NUMEROS . DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+
+    PUNTOPUNTO      shift and go to state 73
+    UNTIL           shift and go to state 74
+    DOWNTO          shift and go to state 75
+
+
+state 66
+
+    (31) for -> FOR APAR ID DOSPUNTOS INT . IN ID CPAR cuerpo
+
+    IN              shift and go to state 76
+
+
+state 67
+
+    (27) cuerpo -> ALLAVE sentencia CLLAVE .
+
+    $end            reduce using rule 27 (cuerpo -> ALLAVE sentencia CLLAVE .)
+    CLLAVE          reduce using rule 27 (cuerpo -> ALLAVE sentencia CLLAVE .)
+    ELSE            reduce using rule 27 (cuerpo -> ALLAVE sentencia CLLAVE .)
+
+
+state 68
+
+    (22) condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador . NUMEROS
+
+    NUMEROS         shift and go to state 77
+
+
+state 69
+
+    (29) if -> IF APAR condicion CPAR cuerpo ELSE . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    condicion                      shift and go to state 6
+    cuerpo                         shift and go to state 78
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 70
+
+    (38) for -> FOR APAR APAR ID COMA ID . CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID COMA ID . CPAR IN ID CPAR cuerpo
+
+    CPAR            shift and go to state 79
+
+
+state 71
+
+    (30) for -> FOR APAR ID IN ID CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 80
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 72
+
+    (36) for -> FOR APAR ID IN ID PUNTO . INDICES CPAR cuerpo
+    (37) for -> FOR APAR ID IN ID PUNTO . ID CPAR cuerpo
+
+    INDICES         shift and go to state 82
+    ID              shift and go to state 81
+
+
+state 73
+
+    (32) for -> FOR APAR ID IN NUMEROS PUNTOPUNTO . NUMEROS CPAR cuerpo
+
+    NUMEROS         shift and go to state 83
+
+
+state 74
+
+    (33) for -> FOR APAR ID IN NUMEROS UNTIL . NUMEROS CPAR cuerpo
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL . NUMEROS STEP NUMEROS CPAR cuerpo
+
+    NUMEROS         shift and go to state 84
+
+
+state 75
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO . NUMEROS STEP NUMEROS CPAR cuerpo
+
+    NUMEROS         shift and go to state 85
+
+
+state 76
+
+    (31) for -> FOR APAR ID DOSPUNTOS INT IN . ID CPAR cuerpo
+
+    ID              shift and go to state 86
+
+
+state 77
+
+    (22) condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .
+
+    $end            reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    ALLAVE          reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    VAL             reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    VAR             reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    NUMEROS         reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    PRINTLN         reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    ID              reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    IF              reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    FOR             reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    WHILE           reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    CPAR            reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    CLLAVE          reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+    ELSE            reduce using rule 22 (condicion -> NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS .)
+
+
+state 78
+
+    (29) if -> IF APAR condicion CPAR cuerpo ELSE cuerpo .
+
+    $end            reduce using rule 29 (if -> IF APAR condicion CPAR cuerpo ELSE cuerpo .)
+    CLLAVE          reduce using rule 29 (if -> IF APAR condicion CPAR cuerpo ELSE cuerpo .)
+    ELSE            reduce using rule 29 (if -> IF APAR condicion CPAR cuerpo ELSE cuerpo .)
+
+
+state 79
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR . IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID COMA ID CPAR . IN ID CPAR cuerpo
+
+    IN              shift and go to state 87
+
+
+state 80
+
+    (30) for -> FOR APAR ID IN ID CPAR cuerpo .
+
+    $end            reduce using rule 30 (for -> FOR APAR ID IN ID CPAR cuerpo .)
+    CLLAVE          reduce using rule 30 (for -> FOR APAR ID IN ID CPAR cuerpo .)
+    ELSE            reduce using rule 30 (for -> FOR APAR ID IN ID CPAR cuerpo .)
+
+
+state 81
+
+    (37) for -> FOR APAR ID IN ID PUNTO ID . CPAR cuerpo
+
+    CPAR            shift and go to state 88
+
+
+state 82
+
+    (36) for -> FOR APAR ID IN ID PUNTO INDICES . CPAR cuerpo
+
+    CPAR            shift and go to state 89
+
+
+state 83
+
+    (32) for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS . CPAR cuerpo
+
+    CPAR            shift and go to state 90
+
+
+state 84
+
+    (33) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS . CPAR cuerpo
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS . STEP NUMEROS CPAR cuerpo
+
+    CPAR            shift and go to state 91
+    STEP            shift and go to state 92
+
+
+state 85
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS . STEP NUMEROS CPAR cuerpo
+
+    STEP            shift and go to state 93
+
+
+state 86
+
+    (31) for -> FOR APAR ID DOSPUNTOS INT IN ID . CPAR cuerpo
+
+    CPAR            shift and go to state 94
+
+
+state 87
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN . ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID COMA ID CPAR IN . ID CPAR cuerpo
+
+    ID              shift and go to state 95
+
+
+state 88
+
+    (37) for -> FOR APAR ID IN ID PUNTO ID CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 96
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 89
+
+    (36) for -> FOR APAR ID IN ID PUNTO INDICES CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 97
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 90
+
+    (32) for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 98
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 91
+
+    (33) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 99
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 92
+
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP . NUMEROS CPAR cuerpo
+
+    NUMEROS         shift and go to state 100
+
+
+state 93
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP . NUMEROS CPAR cuerpo
+
+    NUMEROS         shift and go to state 101
+
+
+state 94
+
+    (31) for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 102
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 95
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID . PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> FOR APAR APAR ID COMA ID CPAR IN ID . CPAR cuerpo
+
+    PUNTO           shift and go to state 104
+    CPAR            shift and go to state 103
+
+
+state 96
+
+    (37) for -> FOR APAR ID IN ID PUNTO ID CPAR cuerpo .
+
+    $end            reduce using rule 37 (for -> FOR APAR ID IN ID PUNTO ID CPAR cuerpo .)
+    CLLAVE          reduce using rule 37 (for -> FOR APAR ID IN ID PUNTO ID CPAR cuerpo .)
+    ELSE            reduce using rule 37 (for -> FOR APAR ID IN ID PUNTO ID CPAR cuerpo .)
+
+
+state 97
+
+    (36) for -> FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo .
+
+    $end            reduce using rule 36 (for -> FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo .)
+    CLLAVE          reduce using rule 36 (for -> FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo .)
+    ELSE            reduce using rule 36 (for -> FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo .)
+
+
+state 98
+
+    (32) for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo .
+
+    $end            reduce using rule 32 (for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo .)
+    CLLAVE          reduce using rule 32 (for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo .)
+    ELSE            reduce using rule 32 (for -> FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo .)
+
+
+state 99
+
+    (33) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo .
+
+    $end            reduce using rule 33 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo .)
+    CLLAVE          reduce using rule 33 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo .)
+    ELSE            reduce using rule 33 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo .)
+
+
+state 100
+
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS . CPAR cuerpo
+
+    CPAR            shift and go to state 105
+
+
+state 101
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS . CPAR cuerpo
+
+    CPAR            shift and go to state 106
+
+
+state 102
+
+    (31) for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo .
+
+    $end            reduce using rule 31 (for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo .)
+    CLLAVE          reduce using rule 31 (for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo .)
+    ELSE            reduce using rule 31 (for -> FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo .)
+
+
+state 103
+
+    (39) for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 107
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 104
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO . WITHINDEX APAR CPAR CPAR cuerpo
+
+    WITHINDEX       shift and go to state 108
+
+
+state 105
+
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 109
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 106
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 110
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 107
+
+    (39) for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo .
+
+    $end            reduce using rule 39 (for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo .)
+    CLLAVE          reduce using rule 39 (for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo .)
+    ELSE            reduce using rule 39 (for -> FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo .)
+
+
+state 108
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX . APAR CPAR CPAR cuerpo
+
+    APAR            shift and go to state 111
+
+
+state 109
+
+    (34) for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo .
+
+    $end            reduce using rule 34 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo .)
+    CLLAVE          reduce using rule 34 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo .)
+    ELSE            reduce using rule 34 (for -> FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo .)
+
+
+state 110
+
+    (35) for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo .
+
+    $end            reduce using rule 35 (for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo .)
+    CLLAVE          reduce using rule 35 (for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo .)
+    ELSE            reduce using rule 35 (for -> FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo .)
+
+
+state 111
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR . CPAR CPAR cuerpo
+
+    CPAR            shift and go to state 112
+
+
+state 112
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR . CPAR cuerpo
+
+    CPAR            shift and go to state 113
+
+
+state 113
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR . cuerpo
+    (26) cuerpo -> . sentencia
+    (27) cuerpo -> . ALLAVE sentencia CLLAVE
+    (1) sentencia -> . asignacion
+    (2) sentencia -> . expresion
+    (3) sentencia -> . metodo
+    (4) sentencia -> . control
+    (5) sentencia -> . condicion
+    (6) asignacion -> . VAL ID IGUAL NUMEROS
+    (7) asignacion -> . VAR ID IGUAL NUMEROS
+    (8) expresion -> . NUMEROS SUMA NUMEROS
+    (9) expresion -> . PRINTLN APAR COMDOBLE ID CPAR
+    (10) expresion -> . PRINTLN APAR ID CPAR
+    (11) metodo -> . ID PUNTO ID
+    (23) control -> . if
+    (24) control -> . for
+    (25) control -> . while
+    (21) condicion -> . NUMEROS comparador NUMEROS
+    (22) condicion -> . NUMEROS comparador NUMEROS conector NUMEROS comparador NUMEROS
+    (28) if -> . IF APAR condicion CPAR cuerpo
+    (29) if -> . IF APAR condicion CPAR cuerpo ELSE cuerpo
+    (30) for -> . FOR APAR ID IN ID CPAR cuerpo
+    (31) for -> . FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
+    (32) for -> . FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
+    (33) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
+    (34) for -> . FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
+    (35) for -> . FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+    (36) for -> . FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
+    (37) for -> . FOR APAR ID IN ID PUNTO ID CPAR cuerpo
+    (38) for -> . FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
+    (39) for -> . FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
+    (40) while -> . WHILE condicion cuerpo
+
+    ALLAVE          shift and go to state 47
+    VAL             shift and go to state 7
+    VAR             shift and go to state 10
+    NUMEROS         shift and go to state 9
+    PRINTLN         shift and go to state 11
+    ID              shift and go to state 8
+    IF              shift and go to state 15
+    FOR             shift and go to state 16
+    WHILE           shift and go to state 17
+
+    cuerpo                         shift and go to state 114
+    sentencia                      shift and go to state 46
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodo                         shift and go to state 4
+    control                        shift and go to state 5
+    condicion                      shift and go to state 6
+    if                             shift and go to state 12
+    for                            shift and go to state 13
+    while                          shift and go to state 14
+
+state 114
+
+    (38) for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo .
+
+    $end            reduce using rule 38 (for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo .)
+    CLLAVE          reduce using rule 38 (for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo .)
+    ELSE            reduce using rule 38 (for -> FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 62 resolved as shift
