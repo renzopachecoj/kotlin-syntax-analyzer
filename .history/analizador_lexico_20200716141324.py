@@ -14,7 +14,7 @@ reservados = {
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    #'index': 'INDEX',
+    'index': 'INDEX',
     'fun' : 'FUN'
 }
 
@@ -75,7 +75,7 @@ simbolos = [
     'PUNTOPUNTO',
     'PUNTOCOMA',
     'COMA',
-    'ARROBA',
+    #'ARROBA',
     'COMSIMPLE',
     'COMDOBLE',
     'SIGNODOLAR',

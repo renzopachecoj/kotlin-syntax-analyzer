@@ -13,7 +13,7 @@ def p_sentencia(p):
                 | condicion
                 | atributo
     '''
-
+    print("sentencia")
 
 def p_asignacion(p):
     '''asignacion : VAL ID IGUAL NUMEROS
@@ -21,15 +21,13 @@ def p_asignacion(p):
     '''
     print("asignacion")
 
-
 def p_expresion(p):
     '''expresion : NUMEROS SUMA NUMEROS
-                | PRINTLN APAR COMDOBLE ID COMDOBLE CPAR
+                | PRINTLN APAR COMDOBLE ID CPAR
                 | PRINTLN APAR ID CPAR
     '''
     print("expresion")
-
-
+    
 def p_funcion(p):
     '''funcion : WITHINDEX
                 | GET
@@ -46,25 +44,18 @@ def p_funcion(p):
                 | PRINTLN
                 | INDICES
     '''
-
+    print("funcion")
 
 def p_metodo(p):
     '''metodo : ID PUNTO ID APAR CPAR
-            | ID PUNTO ID APAR ID CPAR
-            | atributo PUNTO ID APAR CPAR
-            | atributo PUNTO ID APAR ID CPAR
-            | ID PUNTO funcion APAR CPAR
-            | ID PUNTO funcion APAR ID CPAR
-            | atributo PUNTO funcion APAR CPAR
-            | atributo PUNTO funcion APAR ID CPAR
+            | ID PUNTO ID CPAR ID CPAR
+            | ID PUNTO ID CPAR ID PUNTO ID CPAR
+            | ID PUNTO ID CPAR ID PUNTO ID APAR ID CPAR CPAR
     '''
     print("metodo")
 
-
 def p_atributo(p):
     '''atributo : ID PUNTO ID'''
-    print("atributo")
-
 
 def p_comparador(p):
     '''comparador : IGUALIGUAL 
@@ -80,7 +71,7 @@ def p_conector(p):
     '''conector : AND 
                 | OR
     '''
-
+#condicion : NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo) (CONECTOR NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo))*
 def p_compmiembro(p):
     '''compmiembro : ID
                     | NUMEROS
@@ -92,28 +83,22 @@ def p_compmiembro(p):
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
                 | compmiembro comparador compmiembro conector compmiembro comparador compmiembro
-    '''
-    print("condicion")
+    ''' 
 
 def p_control(p):
     '''control : if
                 | for
                 | while
     '''
-
-
+    
 def p_cuerpo(p):
     '''cuerpo : sentencia
                 | ALLAVE sentencia CLLAVE
     '''
-
-
 def p_if(p):
     '''if : IF APAR condicion CPAR cuerpo
         | IF APAR condicion CPAR cuerpo ELSE cuerpo
     '''
-    print("if")
-
 
 def p_for(p):
     '''for : FOR APAR ID IN ID CPAR cuerpo
@@ -127,18 +112,15 @@ def p_for(p):
         | FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
         | FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
     '''
-    print("for")
-
 
 def p_while(p):
-    '''while : WHILE APAR condicion CPAR cuerpo
+    '''while : WHILE condicion cuerpo
     '''
-    print("while")
-
-
+cadena = ''' 
+        println(numbers.slice(1..3))
+    '''
 def p_error(p):
     print("Error de sintaxis en: ", p.value)
-
 
 parser = yacc.yacc()
 while True:
@@ -146,7 +128,6 @@ while True:
         s = input('<kotlin> ')
     except EOFError:
         break
-    if not s:
-        continue
+    if not s: continue
     result = parser.parse(s)
     print(result)

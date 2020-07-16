@@ -5,6 +5,7 @@ import analizador_lexico
 lexer = lex.lex(module=analizador_lexico)
 tokens = analizador_lexico.tokens
 
+
 def p_sentencia(p):
     '''sentencia : asignacion
                 | expresion
@@ -80,6 +81,7 @@ def p_conector(p):
     '''conector : AND 
                 | OR
     '''
+# condicion : NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo) (CONECTOR NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo))*
 
 def p_compmiembro(p):
     '''compmiembro : ID

@@ -14,7 +14,7 @@ reservados = {
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    #'index': 'INDEX',
+    'index': 'INDEX',
     'fun' : 'FUN'
 }
 

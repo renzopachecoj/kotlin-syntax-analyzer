@@ -5,6 +5,7 @@ import analizador_lexico
 lexer = lex.lex(module=analizador_lexico)
 tokens = analizador_lexico.tokens
 
+
 def p_sentencia(p):
     '''sentencia : asignacion
                 | expresion
@@ -24,7 +25,7 @@ def p_asignacion(p):
 
 def p_expresion(p):
     '''expresion : NUMEROS SUMA NUMEROS
-                | PRINTLN APAR COMDOBLE ID COMDOBLE CPAR
+                | PRINTLN APAR COMDOBLE ID CPAR
                 | PRINTLN APAR ID CPAR
     '''
     print("expresion")
@@ -76,10 +77,13 @@ def p_comparador(p):
                 | MENORIGUAL
     '''
 
+
 def p_conector(p):
     '''conector : AND 
                 | OR
     '''
+# condicion : NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo) (CONECTOR NEGACION* (expresion | metodo) comparador NEGACION* (expresion | metodo))*
+
 
 def p_compmiembro(p):
     '''compmiembro : ID
@@ -89,11 +93,13 @@ def p_compmiembro(p):
                     | asignacion
     '''
 
+
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
                 | compmiembro comparador compmiembro conector compmiembro comparador compmiembro
     '''
     print("condicion")
+
 
 def p_control(p):
     '''control : if
@@ -131,7 +137,7 @@ def p_for(p):
 
 
 def p_while(p):
-    '''while : WHILE APAR condicion CPAR cuerpo
+    '''while : WHILE condicion cuerpo
     '''
     print("while")
 
