@@ -86,14 +86,19 @@ def p_tipoDato(p):
 def p_valor(p):
     '''valor : ENTEROEXPRESION
              | flotante
-             | BOOLEANOEXPRESION
+             | expresionBooleano
              | CADENAEXPRESION
              | list
              | set
              | pair
              | triple
              | expresion
-             | ID'''
+             | ID
+             | if'''
+
+def p_expresionBooleano(p):
+    '''expresionBooleano : TRUE
+                        | FALSE'''
 
 def p_flotante(p):
     '''flotante : ENTEROEXPRESION F
@@ -248,8 +253,36 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-test = '''print(")
-    println("hola")
+test = '''val max = if (a > b) a else b
+
+for (item in collection) {print(item)}
+
+while (x > 0) {x+1}
+
+while(x>1) {
+     var x = 5
+}
+
+while(x >= 40) {
+    val words: Set<String> = setOf("pen", "cup", "dog", "spectacles")
+}
+
+if( x< 5) {
+    val a: Boolean = true
+}
+
+    val b: Boolean = false
+    print("a && b = $condicion")
+
+list.contains("element")
+
+for (x in 1..10){
+	if(x>5){
+		println("x>5")
+	}
+}
+
+println("abc".compareTo(""))
 '''
 
 result = parser.parse(test)

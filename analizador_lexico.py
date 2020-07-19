@@ -88,8 +88,7 @@ simbolos = [
 ]
 
 valores = ["ENTEROEXPRESION",
-           "CADENAEXPRESION",
-           "BOOLEANOEXPRESION"]
+           "CADENAEXPRESION"]
 
 comentarios = ["COMENTARIOMULTILINEA",
                "COMENTARIOSIMPLE"]
@@ -136,7 +135,6 @@ t_PREGUNTA = r'\?'
 t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'
 
-t_BOOLEANOEXPRESION = r'(true|false)'
 # t_FLOTANTEEXPRESION = r'\d+(\.\d+)?f'
 
 t_ignore = ' \t'
