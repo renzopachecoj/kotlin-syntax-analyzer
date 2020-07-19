@@ -15,7 +15,8 @@ reservados = {
     'step': 'STEP',
     'downTo': 'DOWNTO',
     #'index': 'INDEX',
-    'fun': 'FUN'
+    'fun': 'FUN',
+    'f' : 'F'
 }
 
 funciones = {
@@ -34,7 +35,9 @@ funciones = {
     'println': 'PRINTLN',
     'indices': 'INDICES',
     'main': 'MAIN',
-    'indexOf': 'INDEXOF'
+    'indexOf': 'INDEXOF',
+    'listOf': 'LISTOF',
+    'setOf': 'SETOF'
 }
 
 variables = {
@@ -86,7 +89,6 @@ simbolos = [
 
 valores = ["ENTEROEXPRESION",
            "CADENAEXPRESION",
-           "FLOTANTEEXPRESION",
            "BOOLEANOEXPRESION"]
 
 comentarios = ["COMENTARIOMULTILINEA",
@@ -135,6 +137,7 @@ t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'
 
 t_BOOLEANOEXPRESION = r'(true|false)'
+# t_FLOTANTEEXPRESION = r'\d+(\.\d+)?f'
 
 t_ignore = ' \t'
 
@@ -162,14 +165,14 @@ def t_CADENAEXPRESION(t):
     t.value = t.value[1:-1] # remuevo las comillas
     return t
 
-def t_FLOTANTEEXPRESION(t):
-    r'\d+(\.\d+)?f'
-    try:
-        t.value = float(t.value[:-2])
-    except ValueError:
-        print("Float value too large %d", t.value)
-        t.value = 0
-    return t
+# def t_FLOTANTEEXPRESION(t):
+#     r'\d+(\.\d+)?f'
+#     try:
+#         t.value = float(t.value[:-2])
+#     except ValueError:
+#         print("Float value too large %d", t.value)
+#         t.value = 0
+#     return t
 
 # Comentario de múltiples líneas /* .. */
 def t_COMENTARIOMULTILINEA(t):

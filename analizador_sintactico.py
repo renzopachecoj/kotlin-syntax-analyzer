@@ -16,9 +16,12 @@ def p_todos(p):
     | todos sentencia PUNTOCOMA'''
 
 def p_sentencia(p):
-    '''sentencia : funcion
-                 | print
-                 | asignacion
+    '''sentencia : asignacion
+                | valor
+                | funcion
+                | control
+                | condicion
+                | print
     '''
 
 
@@ -56,8 +59,8 @@ def p_funcion_Getindex(p):
 def p_asignacion(p):
     '''asignacion : VAL ID tipoAsignacion
                   | VAR ID tipoAsignacion
+                  | ID inicializacion
     '''
-    print("asignacion")
 
 def p_tipoAsignacion(p):
     '''tipoAsignacion : declaracion
@@ -82,126 +85,98 @@ def p_tipoDato(p):
 
 def p_valor(p):
     '''valor : ENTEROEXPRESION
-             | FLOTANTEEXPRESION
+             | flotante
              | BOOLEANOEXPRESION
              | CADENAEXPRESION
              | list
              | set
              | pair
-             | triple'''
+             | triple
+             | expresion
+             | ID'''
+
+def p_flotante(p):
+    '''flotante : ENTEROEXPRESION F
+                | ENTEROEXPRESION PUNTO ENTEROEXPRESION F'''
 
 def p_list(p):
-    'list : ACOR contenido CCOR'
+    'list : LISTOF APAR contenido CPAR'
 
 def p_set(p):
-    'set : APAR contenido CPAR'
+    'set : SETOF APAR contenido CPAR'
 
 def p_pair(p):
-    'pair : APAR tipoFactor COMA tipoFactor CPAR'
+    'pair : PAIR APAR factorEspecial COMA factorEspecial CPAR'
 
 def p_triple(p):
-    'triple : APAR tipoFactor COMA tipoFactor COMA tipoFactor CPAR'
+    'triple : TRIPLE APAR factorEspecial COMA factorEspecial COMA factorEspecial CPAR'
 
 def p_contenido(p):
-    '''contenido : elementos factor
-                 | elementos factorEspecial'''
-
-def p_elementos_col(p):
-    'elementos : elementos COMA'
-
-def p_elementos_ter(p):
-    '''elementos : factor
-                 | factorEspecial'''
-
-def p_tipoFactor(p):
-    '''tipoFactor : factor
-                | factorEspecial'''
+    '''contenido : factorEspecial
+                 | factorEspecial COMA contenido'''
 
 def p_expresion_suma(p):
     'expresion : expresion SUMA termino'
-    p[0] = p[1] + p[3]
 
 def p_expresion_resta(p):
     'expresion : expresion RESTA termino'
-    p[0] = p[1] - p[3]
 
 def p_expresion_division(p):
     'expresion : expresion DIVISION termino'
-    p[0] = p[1] / p[3]
 
 def p_expresion_mult(p):
     'expresion : expresion MULT termino'
-    p[0] = p[1] * p[3]
 
 def p_expresion_modulo(p):
     'expresion : expresion MODULO termino'
-    p[0] = p[1] % p[3]
 
 def p_expresion_termino(p):
     'expresion : termino'
-    p[0] = p[1]
 
 def p_termino_suma(p):
     'termino : termino SUMA factorEspecial'
-    p[0] = p[1] + p[3]
 
 def p_termino_resta(p):
     'termino : termino RESTA factor'
-    p[0] = p[1] - p[3]
 
 def p_termino_mult(p):
     'termino : termino MULT factor'
-    p[0] = p[1] * p[3]
 
 def p_termino_division(p):
     'termino : termino DIVISION factor'
-    p[0] = p[1] / p[3]
 
 def p_termino_modulo(p):
     'termino : termino MODULO factor'
-    p[0] = p[1] % p[3]
 
 def p_termino_factor(p):
     'termino : factor'
-    p[0] = p[1]
 
 def p_termino_factorEspecial(p):
     '''termino : ENTEROEXPRESION
-               | FLOTANTEEXPRESION
+               | flotante
                | CADENAEXPRESION
                | list
-               | set'''
+               | set
+               | ID'''
 
 def p_factor_num(p):
     'factor : ENTEROEXPRESION'
-    p[0] = p[1]
 
 def p_factor_float(p):
-    'factor : FLOTANTEEXPRESION'
-    p[0] = p[1]
+    'factor : flotante'
+
+def p_factor_id(p):
+    'factor : ID'
 
 def p_factorEspecial(p):
-    '''factorEspecial : ENTEROEXPRESION
-               | FLOTANTEEXPRESION
+    '''factorEspecial : factor
                | CADENAEXPRESION
                | list
                | set'''
 
-# def p_factorEspecial_string(p):
-#     'factorEspecial : CADENAEXPRESION'
-#     p[0] = p[1]
-
-# def p_factorEspecial_list(p):
-#     'factorEspecial : list'
-#     p[0] = p[1]
-#
-# def p_factorEspecial_set(p):
-#     'factorEspecial : set'
-#     p[0] = p[1]
-
 def p_factor_expr(p):
     'factor : APAR expresion CPAR'
-    p[0] = p[2]
+
 
 def p_comparador(p):
     '''comparador : IGUALIGUAL 
@@ -229,7 +204,6 @@ def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
                 | compmiembro comparador compmiembro conector compmiembro comparador compmiembro
     '''
-    print("condicion")
 
 def p_control(p):
     '''control : if
@@ -246,7 +220,6 @@ def p_if(p):
     '''if : IF APAR condicion CPAR cuerpo
         | IF APAR condicion CPAR cuerpo ELSE cuerpo
     '''
-    print("if")
 
 def p_for(p):
     '''for : FOR APAR ID IN ID CPAR cuerpo
@@ -260,16 +233,17 @@ def p_for(p):
         | FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
         | FOR APAR APAR ID COMA ID CPAR IN ID CPAR cuerpo
     '''
-    print("for")
 
 def p_while(p):
     '''while : WHILE APAR condicion CPAR cuerpo
     '''
-    print("while")
 
 
 def p_error(p):
-    print("Syntax Error at line %d in token: %s" %(p.lineno,p.value))
+    try:
+        print("Syntax Error at line %d in token: %s" %(p.lineno,p.value))
+    except:
+        print("Error de sintaxis")
 
 
 parser = yacc.yacc()
