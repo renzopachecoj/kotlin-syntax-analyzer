@@ -16,19 +16,144 @@ def p_sentencia(p):
 
 
 def p_asignacion(p):
-    '''asignacion : VAL ID IGUAL NUMEROS
-                | VAR ID IGUAL NUMEROS
+    '''asignacion : VAL ID tipoAsignacion
+                  | VAR ID tipoAsignacion
     '''
     print("asignacion")
 
+def p_tipoAsignacion(p):
+    '''tipoAsignacion : declaracion
+                      | inicializacion
+                      | declaracion inicializacion'''
 
-def p_expresion(p):
-    '''expresion : NUMEROS SUMA NUMEROS
-                | PRINTLN APAR COMDOBLE ID COMDOBLE CPAR
-                | PRINTLN APAR ID CPAR
-    '''
-    print("expresion")
+def p_declaracion(p):
+    'declaracion : DOSPUNTOS tipoDato'
 
+def p_inicializacion(p):
+    'inicializacion : IGUAL valor'
+
+def p_tipoDato(p):
+    '''variable : INT
+                | FLOAT
+                | BOOLEAN
+                | STRING
+                | LIST MENOR tipoDato MAYOR
+                | SET MENOR tipoDato MAYOR
+                | PAIR MENOR tipoDato COMA tipoDato MAYOR
+                | TRIPLE MENOR tipoDato COMA tipoDato COMA tipoDato MAYOR '''
+
+def p_valor(p):
+    '''valor : ENTEROEXPRESION
+             | FLOTANTEEXPRESION
+             | BOOLEANOEXPRESION
+             | CADENAEXPRESION
+             | coleccion '''
+
+#TODO: list, set, pair, triple functions
+
+def p_coleccion_list(p):
+    'coleccion : ACOR contenido CCOR'
+
+def p_coleccion_set(p):
+    'coleccion : APAR contenido CPAR'
+
+def p_coleccion_pair(p):
+    'coleccion : APAR tipoFactor COMA tipoFactor CPAR'
+
+def p_coleccion_triple(p):
+    'coleccion : APAR tipoFactor COMA tipoFactor COMA tipoFactor CPAR'
+
+def p_contenido(p):
+    '''contenido : elementos factor
+                 | elementos factorEspecial'''
+
+def p_elementos_col(p):
+    'elementos : elementos COMA'
+
+def p_elementos_ter(p):
+    '''elementos : factor
+                 | factorEspecial'''
+
+def p_tipoFactor(p):
+    '''factores : factor
+                | factorEspecial'''
+
+def p_expresion_suma(p):
+    'expresion : expresion SUMA termino'
+    p[0] = p[1] + p[3]
+
+def p_expresion_resta(p):
+    'expresion : expresion RESTA termino'
+    p[0] = p[1] - p[3]
+
+def p_expresion_division(p):
+    'expresion : expresion DIVISION termino'
+    p[0] = p[1] / p[3]
+
+def p_expresion_mult(p):
+    'expresion : expresion MULT termino'
+    p[0] = p[1] * p[3]
+
+def p_expresion_modulo(p):
+    'expresion : expresion MODULO termino'
+    p[0] = p[1] % p[3]
+
+def p_expresion_termino(p):
+    'expresion : termino'
+    p[0] = p[1]
+
+def p_termino_suma(p):
+    'termino : termino SUMA factorEspecial'
+    p[0] = p[1] + p[3]
+
+def p_termino_resta(p):
+    'termino : termino RESTA factor'
+    p[0] = p[1] - p[3]
+
+def p_termino_mult(p):
+    'termino : termino MULT factor'
+    p[0] = p[1] * p[3]
+
+def p_termino_division(p):
+    'termino : termino DIVISION factor'
+    p[0] = p[1] / p[3]
+
+def p_termino_modulo(p):
+    'termino : termino MODULO factor'
+    p[0] = p[1] % p[3]
+
+def p_termino_factor(p):
+    'termino : factor'
+    p[0] = p[1]
+
+def p_termino_factorEspecial(p):
+    '''termino : factorEspecial
+               | factor'''
+    p[0] = p[1]
+
+def p_factor_num(p):
+    'factor: ENTEROEXPRESION'
+    p[0] = p[1]
+
+def p_factor_float(p):
+    'factor : FLOTANTEEXPRESION'
+    p[0] = p[1]
+
+def p_factorEspecial_string(p):
+    'factorEspecial : CADENAEXPRESION'
+    p[0] = p[1]
+
+def p_factorEspecial_list(p):
+    'factorEspecial : list'
+    p[0] = p[1]
+
+def p_factorEspecial_set(p):
+    'factorEspecial : set'
+    p[0] = p[1]
+
+def p_factor_expr(p):
+    'factor : APAR expresion CPAR'
+    p[0] = p[2]
 
 def p_funcion(p):
     '''funcion : WITHINDEX
