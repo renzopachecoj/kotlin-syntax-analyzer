@@ -5,15 +5,53 @@ import analizador_lexico
 lexer = lex.lex(module=analizador_lexico)
 tokens = analizador_lexico.tokens
 
+#def p_main(p):
+#    '''main : FUN MAIN APAR CPAR ALLAVE todos CLLAVE
+#    | FUN MAIN APAR CPAR ALLAVE CLLAVE'''
+
+def p_todos(p):
+    '''todos : sentencia PUNTOCOMA
+    | sentencia
+    | todos sentencia
+    | todos sentencia PUNTOCOMA'''
+
 def p_sentencia(p):
-    '''sentencia : asignacion
-                | expresion
-                | metodo
-                | control
-                | condicion
-                | atributo
+    '''sentencia : funcion
+                 | print
+                 | asignacion
     '''
 
+
+def p_print(p):
+    '''print : printType APAR CADENAEXPRESION CPAR
+             | printType APAR CPAR
+             | printType APAR ID CPAR
+             | printType APAR funcion CPAR'''
+
+def p_print_error(p):
+    'print : printType APAR error CPAR'
+    print("\tBad expression '%s' in function print." %(p[3].value))
+
+
+def p_printType(p):
+    '''printType : PRINT
+                 | PRINTLN'''
+
+def p_funcion_string_compare(p):
+    'funcion : CADENAEXPRESION PUNTO COMPARETO APAR CADENAEXPRESION CPAR'
+
+def p_funcion_string_getindex(p):
+    'funcion : CADENAEXPRESION PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
+
+def p_funcion_string_hash(p):
+    'funcion : CADENAEXPRESION PUNTO HASHCODE APAR CPAR'
+
+def p_funcion_contains(p):
+    '''funcion : ID PUNTO CONTAINS APAR factorEspecial CPAR
+               | ID PUNTO CONTAINS APAR ID CPAR'''
+
+def p_funcion_Getindex(p):
+    'funcion : ID PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
 
 def p_asignacion(p):
     '''asignacion : VAL ID tipoAsignacion
@@ -165,42 +203,6 @@ def p_factor_expr(p):
     'factor : APAR expresion CPAR'
     p[0] = p[2]
 
-def p_funcion(p):
-    '''funcion : WITHINDEX
-                | GET
-                | SLICE
-                | COMPARETO
-                | GETINDEX
-                | HASHCODE
-                | CONTAINS
-                | SIZE
-                | ISEMPTY
-                | TOSTRING
-                | TOLIST
-                | PRINT
-                | PRINTLN
-                | INDICES
-    '''
-
-
-def p_metodo(p):
-    '''metodo : ID PUNTO ID APAR CPAR
-            | ID PUNTO ID APAR ID CPAR
-            | atributo PUNTO ID APAR CPAR
-            | atributo PUNTO ID APAR ID CPAR
-            | ID PUNTO funcion APAR CPAR
-            | ID PUNTO funcion APAR ID CPAR
-            | atributo PUNTO funcion APAR CPAR
-            | atributo PUNTO funcion APAR ID CPAR
-    '''
-    print("metodo")
-
-
-def p_atributo(p):
-    '''atributo : ID PUNTO ID'''
-    print("atributo")
-
-
 def p_comparador(p):
     '''comparador : IGUALIGUAL 
                 | TRIPLEIGUAL 
@@ -219,8 +221,7 @@ def p_conector(p):
 def p_compmiembro(p):
     '''compmiembro : ID
                     | ENTEROEXPRESION
-                    | metodo
-                    | atributo
+                    | funcion
                     | asignacion
     '''
 
@@ -236,19 +237,16 @@ def p_control(p):
                 | while
     '''
 
-
 def p_cuerpo(p):
     '''cuerpo : sentencia
                 | ALLAVE sentencia CLLAVE
     '''
-
 
 def p_if(p):
     '''if : IF APAR condicion CPAR cuerpo
         | IF APAR condicion CPAR cuerpo ELSE cuerpo
     '''
     print("if")
-
 
 def p_for(p):
     '''for : FOR APAR ID IN ID CPAR cuerpo
@@ -264,7 +262,6 @@ def p_for(p):
     '''
     print("for")
 
-
 def p_while(p):
     '''while : WHILE APAR condicion CPAR cuerpo
     '''
@@ -272,10 +269,17 @@ def p_while(p):
 
 
 def p_error(p):
-    print("Error de sintaxis en: ", p.value)
+    print("Syntax Error at line %d in token: %s" %(p.lineno,p.value))
 
 
 parser = yacc.yacc()
+
+test = '''print(")
+    println("hola")
+'''
+
+result = parser.parse(test)
+print(result)
 while True:
     try:
         s = input('<kotlin> ')

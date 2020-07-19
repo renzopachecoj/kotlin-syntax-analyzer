@@ -15,7 +15,7 @@ reservados = {
     'step': 'STEP',
     'downTo': 'DOWNTO',
     #'index': 'INDEX',
-    'fun' : 'FUN'
+    'fun': 'FUN'
 }
 
 funciones = {
@@ -32,7 +32,9 @@ funciones = {
     'toList': 'TOLIST',
     'print': 'PRINT',
     'println': 'PRINTLN',
-    'indices': 'INDICES'
+    'indices': 'INDICES',
+    'main': 'MAIN',
+    'indexOf': 'INDEXOF'
 }
 
 variables = {
