@@ -90,11 +90,9 @@ valores = ["ENTEROEXPRESION",
 comentarios = ["COMENTARIOMULTILINEA",
                "COMENTARIOSIMPLE"]
 
-tokens = ["NUMEROS", "ID"] + list(comentarios) + list(valores)\
+tokens = ["ID"] + list(comentarios) + list(valores)\
          + list(reservados.values()) + list(simbolos)  \
          + list(funciones.values()) + list(variables.values()) \
-
-t_NUMEROS = r'[0-9]+'
 
 t_IGUAL = r'='
 t_IGUALIGUAL = r'=='
