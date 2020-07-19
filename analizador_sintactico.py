@@ -33,7 +33,7 @@ def p_inicializacion(p):
     'inicializacion : IGUAL valor'
 
 def p_tipoDato(p):
-    '''variable : INT
+    '''tipoDato : INT
                 | FLOAT
                 | BOOLEAN
                 | STRING
@@ -47,21 +47,22 @@ def p_valor(p):
              | FLOTANTEEXPRESION
              | BOOLEANOEXPRESION
              | CADENAEXPRESION
-             | coleccion '''
+             | list
+             | set
+             | pair
+             | triple'''
 
-#TODO: list, set, pair, triple functions
+def p_list(p):
+    'list : ACOR contenido CCOR'
 
-def p_coleccion_list(p):
-    'coleccion : ACOR contenido CCOR'
+def p_set(p):
+    'set : APAR contenido CPAR'
 
-def p_coleccion_set(p):
-    'coleccion : APAR contenido CPAR'
+def p_pair(p):
+    'pair : APAR tipoFactor COMA tipoFactor CPAR'
 
-def p_coleccion_pair(p):
-    'coleccion : APAR tipoFactor COMA tipoFactor CPAR'
-
-def p_coleccion_triple(p):
-    'coleccion : APAR tipoFactor COMA tipoFactor COMA tipoFactor CPAR'
+def p_triple(p):
+    'triple : APAR tipoFactor COMA tipoFactor COMA tipoFactor CPAR'
 
 def p_contenido(p):
     '''contenido : elementos factor
@@ -75,7 +76,7 @@ def p_elementos_ter(p):
                  | factorEspecial'''
 
 def p_tipoFactor(p):
-    '''factores : factor
+    '''tipoFactor : factor
                 | factorEspecial'''
 
 def p_expresion_suma(p):
@@ -127,29 +128,38 @@ def p_termino_factor(p):
     p[0] = p[1]
 
 def p_termino_factorEspecial(p):
-    '''termino : factorEspecial
-               | factor'''
-    p[0] = p[1]
+    '''termino : ENTEROEXPRESION
+               | FLOTANTEEXPRESION
+               | CADENAEXPRESION
+               | list
+               | set'''
 
 def p_factor_num(p):
-    'factor: ENTEROEXPRESION'
+    'factor : ENTEROEXPRESION'
     p[0] = p[1]
 
 def p_factor_float(p):
     'factor : FLOTANTEEXPRESION'
     p[0] = p[1]
 
-def p_factorEspecial_string(p):
-    'factorEspecial : CADENAEXPRESION'
-    p[0] = p[1]
+def p_factorEspecial(p):
+    '''factorEspecial : ENTEROEXPRESION
+               | FLOTANTEEXPRESION
+               | CADENAEXPRESION
+               | list
+               | set'''
 
-def p_factorEspecial_list(p):
-    'factorEspecial : list'
-    p[0] = p[1]
+# def p_factorEspecial_string(p):
+#     'factorEspecial : CADENAEXPRESION'
+#     p[0] = p[1]
 
-def p_factorEspecial_set(p):
-    'factorEspecial : set'
-    p[0] = p[1]
+# def p_factorEspecial_list(p):
+#     'factorEspecial : list'
+#     p[0] = p[1]
+#
+# def p_factorEspecial_set(p):
+#     'factorEspecial : set'
+#     p[0] = p[1]
 
 def p_factor_expr(p):
     'factor : APAR expresion CPAR'
@@ -208,7 +218,7 @@ def p_conector(p):
 
 def p_compmiembro(p):
     '''compmiembro : ID
-                    | NUMEROS
+                    | ENTEROEXPRESION
                     | metodo
                     | atributo
                     | asignacion
@@ -243,10 +253,10 @@ def p_if(p):
 def p_for(p):
     '''for : FOR APAR ID IN ID CPAR cuerpo
         | FOR APAR ID DOSPUNTOS INT IN ID CPAR cuerpo
-        | FOR APAR ID IN NUMEROS PUNTOPUNTO NUMEROS CPAR cuerpo
-        | FOR APAR ID IN NUMEROS UNTIL NUMEROS CPAR cuerpo
-        | FOR APAR ID IN NUMEROS UNTIL NUMEROS STEP NUMEROS CPAR cuerpo
-        | FOR APAR ID IN NUMEROS DOWNTO NUMEROS STEP NUMEROS CPAR cuerpo
+        | FOR APAR ID IN ENTEROEXPRESION PUNTOPUNTO ENTEROEXPRESION CPAR cuerpo
+        | FOR APAR ID IN ENTEROEXPRESION UNTIL ENTEROEXPRESION CPAR cuerpo
+        | FOR APAR ID IN ENTEROEXPRESION UNTIL ENTEROEXPRESION STEP ENTEROEXPRESION CPAR cuerpo
+        | FOR APAR ID IN ENTEROEXPRESION DOWNTO ENTEROEXPRESION STEP ENTEROEXPRESION CPAR cuerpo
         | FOR APAR ID IN ID PUNTO INDICES CPAR cuerpo
         | FOR APAR ID IN ID PUNTO ID CPAR cuerpo
         | FOR APAR APAR ID COMA ID CPAR IN ID PUNTO WITHINDEX APAR CPAR CPAR cuerpo
