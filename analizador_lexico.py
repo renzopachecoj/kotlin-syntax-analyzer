@@ -43,8 +43,7 @@ variables = {
     'List' : 'LIST',
     'Set' : 'SET',
     'Pair' : 'PAIR',
-    'Triple' : 'TRIPLE',
-    'Array': 'ARRAY'
+    'Triple' : 'TRIPLE'
 }
 
 simbolos = [
@@ -83,10 +82,17 @@ simbolos = [
     'PREGUNTA'
 ]
 
-tokens = ["NUMEROS", "ID"] + list(reservados.values()) + list(simbolos)\
-         + list(funciones.values()) + list(variables.values())
+valores = ["ENTEROEXPRESION",
+           "CADENAEXPRESION",
+           "FLOTANTEEXPRESION",
+           "BOOLEANOEXPRESION"]
 
-t_NUMEROS = r'[0-9]+'
+comentarios = ["COMENTARIOMULTILINEA",
+               "COMENTARIOSIMPLE"]
+
+tokens = ["ID"] + list(comentarios) + list(valores)\
+         + list(reservados.values()) + list(simbolos)  \
+         + list(funciones.values()) + list(variables.values()) \
 
 t_IGUAL = r'='
 t_IGUALIGUAL = r'=='
@@ -126,6 +132,8 @@ t_PREGUNTA = r'\?'
 t_COMSIMPLE = r'\''
 t_COMDOBLE = r'\"'
 
+t_BOOLEANOEXPRESION = r'(true|false)'
+
 t_ignore = ' \t'
 
 def t_ID(t):
@@ -137,6 +145,39 @@ def t_ID(t):
     if t.value in variables:
         t.type = variables.get(t.value, 'VARIABLES')    
     return t
+
+def t_ENTEROEXPRESION(t):
+    r'\d+'
+    try:
+        t.value = int(t.value)
+    except ValueError:
+        print("Integer value too large %d", t.value)
+        t.value = 0
+    return t
+
+def t_CADENAEXPRESION(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1] # remuevo las comillas
+    return t
+
+def t_FLOTANTEEXPRESION(t):
+    r'\d+(\.\d+)?f'
+    try:
+        t.value = float(t.value[:-2])
+    except ValueError:
+        print("Float value too large %d", t.value)
+        t.value = 0
+    return t
+
+# Comentario de múltiples líneas /* .. */
+def t_COMENTARIOMULTILINEA(t):
+    r'/\*(.|\n)*?\*/'
+    t.lexer.lineno += t.value.count('\n')
+
+# Comentario simple // ...
+def t_COMENTARIOSIMPLE(t):
+    r'//.*\n'
+    t.lexer.lineno += 1
 
 def t_error(t):
     print("No se ha reconocido '%s'"%t.value[0])
