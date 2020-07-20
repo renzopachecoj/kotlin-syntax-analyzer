@@ -2,12 +2,10 @@ import ply.lex as lex
 import ply.yacc as yacc
 import analizador_lexico
 
+errors = []
+
 lexer = lex.lex(module=analizador_lexico)
 tokens = analizador_lexico.tokens
-
-#def p_main(p):
-#    '''main : FUN MAIN APAR CPAR ALLAVE todos CLLAVE
-#    | FUN MAIN APAR CPAR ALLAVE CLLAVE'''
 
 def p_todos(p):
     '''todos : sentencia PUNTOCOMA
@@ -33,7 +31,7 @@ def p_print(p):
 
 def p_print_error(p):
     'print : printType APAR error CPAR'
-    print("\tBad expression '%s' in function print." %(p[3].value))
+    print("\tBad expression '%s' in function print. The string is stablish between \"\"" %(p[3].value))
 
 
 def p_printType(p):
@@ -55,6 +53,34 @@ def p_funcion_contains(p):
 
 def p_funcion_Getindex(p):
     'funcion : ID PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
+
+def p_funcion_list_set(p):
+    '''funcion : ID PUNTO SIZE APAR CPAR
+               | ID PUNTO GET APAR CPAR
+               | ID PUNTO SET APAR factorEspecial CPAR'''
+
+def p_funcion_set(p):
+    'funcion : ID PUNTO ISEMPTY APAR CPAR'
+
+def p_funcion_tuple(p):
+    '''funcion : ID PUNTO TOLIST APAR CPAR
+               | ID PUNTO TOSTRING APAR  CPAR'''
+
+def p_funcion_access_slice(p):
+    'funcion : ID PUNTO SLICE APAR contentSlice CPAR'
+
+def p_contentSlice(p):
+    '''contentSlice : ENTEROEXPRESION PUNTOPUNTO ENTEROEXPRESION
+                    | ENTEROEXPRESION PUNTOPUNTO ENTEROEXPRESION STEP ENTEROEXPRESION'''
+
+def p_funcion_access_slice_error(p):
+    'funcion : ID PUNTO SLICE APAR error CPAR'
+    print("\tBad expression '%s' in function slice. Call function \n [variable].slice(NUM .. NUM step NUM)" % (p[5].value))
+
+
+def p_funcion_access_indexOf(p):
+    'funcion : ID PUNTO INDEXOF APAR factorEspecial CPAR'
+
 
 def p_asignacion(p):
     '''asignacion : VAL ID tipoAsignacion
@@ -218,7 +244,7 @@ def p_control(p):
 
 def p_cuerpo(p):
     '''cuerpo : sentencia
-                | ALLAVE sentencia CLLAVE
+                | ALLAVE todos CLLAVE
     '''
 
 def p_if(p):
@@ -245,54 +271,10 @@ def p_while(p):
 
 
 def p_error(p):
+    message = ""
     try:
-        print("Syntax Error at line %d in token: %s" %(p.lineno,p.value))
+        message = "Syntax Error at line %d." %(p.lineno)
     except:
-        print("Error de sintaxis")
+        message = "Error de sintaxis"
+    errors.append(message)
 
-
-parser = yacc.yacc()
-
-test = '''val max = if (a > b) a else b
-
-for (item in collection) {print(item)}
-
-while (x > 0) {x+1}
-
-while(x>1) {
-     var x = 5
-}
-
-while(x >= 40) {
-    val words: Set<String> = setOf("pen", "cup", "dog", "spectacles")
-}
-
-if( x< 5) {
-    val a: Boolean = true
-}
-
-    val b: Boolean = false
-    print("a && b = $condicion")
-
-list.contains("element")
-
-for (x in 1..10){
-	if(x>5){
-		println("x>5")
-	}
-}
-
-println("abc".compareTo(""))
-'''
-
-result = parser.parse(test)
-print(result)
-while True:
-    try:
-        s = input('<kotlin> ')
-    except EOFError:
-        break
-    if not s:
-        continue
-    result = parser.parse(s)
-    print(result)

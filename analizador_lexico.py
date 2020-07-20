@@ -1,3 +1,5 @@
+errors = []
+
 reservados = {
     'val': 'VAL',
     'var': 'VAR',
@@ -183,7 +185,9 @@ def t_COMENTARIOSIMPLE(t):
     t.lexer.lineno += 1
 
 def t_error(t):
-    print("No se ha reconocido '%s'"%t.value[0])
+    message = "No se ha reconocido '" + t.value[0] + "'" + " en la línea " + str(t.lineno)
+    #print("No se ha reconocido '%s'"%t.value[0])
+    errors.append(message)
     t.lexer.skip(1)
 
 def t_newline(t):

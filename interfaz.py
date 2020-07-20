@@ -1,7 +1,12 @@
 import tkinter as tk
+import ply.lex as lex
+import ply.yacc as yacc
+import analizador_lexico
+import analizador_sintactico
 
 window = tk.Tk()
 window.geometry("600x500")
+window.title("Analizador léxico y sintáctico de kotlin")
 
 label = tk.Label(text="Código en lenguaje Kotlin")
 label2 = tk.Label(text="Resultados de análisis")
@@ -10,8 +15,44 @@ textFld = tk.Text()     #input
 textFld2 = tk.Text()    #salida
 textFld2.configure(state="disabled")
 
-btn = tk.Button(text="Analizador Léxico")
-btn2 = tk.Button(text="Analizador Sintáctico")
+
+def presentErrors(errors):
+    textFld2.config(state="normal")
+    textFld2.delete('1.0', "end")
+
+    if len(errors) == 0:
+        textFld2.insert("1.0", "Lexic Errors not found. OK!")
+    else:
+        for i in range(0, len(errors)):
+            textFld2.insert("1.0", errors[len(errors) - 1- i] + "\n")
+    errors.clear()
+    textFld2.config(state="disabled")
+
+def lexer():
+    lexer = lex.lex(module=analizador_lexico)
+    tokens = analizador_lexico.tokens
+    data = textFld.get("1.0", 'end-1c')
+    tok = lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break  # No more input
+        print(tok.type, tok.value, tok.lineno, tok.lexpos)
+    presentErrors(analizador_lexico.errors)
+
+
+def parser():
+    lexer = lex.lex(module=analizador_lexico)
+    tokens = analizador_lexico.tokens
+    parser = yacc.yacc(module=analizador_sintactico)
+    data = textFld.get("1.0", 'end-1c')
+    parser.parse(data)
+    presentErrors(analizador_sintactico.errors)
+
+
+
+btn = tk.Button(text="Analizador Léxico", command=lexer)
+btn2 = tk.Button(text="Analizador Sintáctico", command=parser)
 
 label.grid(row=0,column=0, columnspan=2)
 textFld.grid(row=1,column=0, columnspan=2)
