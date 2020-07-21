@@ -26,12 +26,14 @@ def p_print(p):
     '''print : printType APAR CADENAEXPRESION CPAR
              | printType APAR CPAR
              | printType APAR ID CPAR
-             | printType APAR funcion CPAR'''
+             | printType APAR funcion CPAR
+             | printType APAR condicion CPAR
+             | printType APAR expresion CPAR'''
 
 def p_print_error(p):
     'print : printType APAR error CPAR'
-    message = "\tBad expression '" + str(p[3].value) + "' in function print. The content can be a string" \
-                "\n\tbetween \" print(\"hello Word!\") or a function call."
+    message = "Bad expression '" + str(p[3].value) + "' in function print. The content can be" \
+                " a string between double quotes, example: print(\"hello Word\") or a function call."
     errors.append(message)
 
 
@@ -39,8 +41,17 @@ def p_printType(p):
     '''printType : PRINT
                  | PRINTLN'''
 
-def p_funcion_string_compare(p):
-    'funcion : CADENAEXPRESION PUNTO COMPARETO APAR CADENAEXPRESION CPAR'
+def p_funcion(p):
+    '''funcion : funcionCompare'''
+
+def p_funcion_compare(p):
+    'funcionCompare : CADENAEXPRESION PUNTO COMPARETO APAR CADENAEXPRESION CPAR'
+
+def p_funcion_string_compare_error(p):
+    'funcionCompare : CADENAEXPRESION PUNTO COMPARETO APAR error CPAR'
+    message = "Bad expression '" + str(p[5].value) + "' in function compareTo. The paramenter must be a string" \
+                                                       " between \". \"String\".compareTo(\"String\")."
+    errors.append(message)
 
 def p_funcion_string_getindex(p):
     'funcion : CADENAEXPRESION PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
@@ -121,7 +132,9 @@ def p_valor(p):
              | triple
              | expresion
              | ID
-             | if'''
+             | if
+             | NEGACION ID
+             | NEGACION expresionBooleano'''
 
 def p_expresionBooleano(p):
     '''expresionBooleano : TRUE
@@ -271,11 +284,24 @@ def p_while(p):
     '''while : WHILE APAR condicion CPAR cuerpo
     '''
 
+def p_CADENAEXPRESION(p):
+    '''CADENAEXPRESION : COMDOBLE content COMDOBLE
+                       | COMDOBLE COMDOBLE'''
+
+def p_content(p):
+    '''content : SIGNODOLAR ID
+               | ID
+               | ENTEROEXPRESION
+               | PUNTO
+               | PUNTOPUNTO
+               | comparador
+               | SYMBOL
+               | content content'''
 
 def p_error(p):
     message = ""
     try:
-        message = "Syntax Error at line " + str(p.lineno) + "."
+        message = "Syntax Error at line " + str(p.lineno) + "." + " at token " + p.value
     except:
         message = "Syntax Error"
     errors.append(message)

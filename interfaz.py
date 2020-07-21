@@ -41,6 +41,7 @@ def lexer():
             tok = lexer.token()
             if not tok:
                 break
+            print(tok.value, tok.type, tok.lineno)
         presentErrors(analizador_lexico.errors, "Lexical Errors not found. OK!")
 
 def parser():

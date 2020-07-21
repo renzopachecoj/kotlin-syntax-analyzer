@@ -73,11 +73,12 @@ simbolos = [
     'PUNTOPUNTO',
     'PUNTOCOMA',
     'COMA',
+    "SIGNODOLAR",
+    "SYMBOL",
     "COMDOBLE"
 ]
 
-valores = ["ENTEROEXPRESION",
-           "CADENAEXPRESION"]
+valores = ["ENTEROEXPRESION"]
 
 
 tokens = ["ID"] + list(valores)\
@@ -112,8 +113,9 @@ t_PUNTOPUNTO = r'\.\.'
 t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
+t_SIGNODOLAR = r"\$"
+t_SYMBOL = r'[#%\'*+,@[\\\]^_~]'
 t_COMDOBLE = r'"'
-
 # t_FLOTANTEEXPRESION = r'\d+(\.\d+)?f'
 
 t_ignore = ' \t'
@@ -135,11 +137,6 @@ def t_ENTEROEXPRESION(t):
     except ValueError:
         print("Integer value too large %d", t.value)
         t.value = 0
-    return t
-
-def t_CADENAEXPRESION(t):
-    r'^\".*?\"$'
-    t.value = t.value[1:-1] # remuevo las comillas
     return t
 
 # def t_FLOTANTEEXPRESION(t):
