@@ -276,6 +276,7 @@ def p_compmiembro(p):
                     | CADENAEXPRESION
                     | ENTEROEXPRESION
                     | funcion
+                    | expresionBooleano
                     | NEGACION compmiembro
     '''
 
