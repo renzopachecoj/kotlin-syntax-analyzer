@@ -97,7 +97,7 @@ def p_funcion_access_slice_error(p):
 
 
 def p_funcion_access_indexOf(p):
-    'funcion : ID PUNTO INDEXOF APAR factorEspecial CPAR'
+    'funcion : ID PUNTO INDEXOF APAR valor CPAR'
 
 
 def p_asignacion(p):
@@ -139,7 +139,8 @@ def p_valor(p):
              | expresion
              | ID
              | if
-             | NEGACION ID'''
+             | NEGACION ID
+             | funcion'''
 
 def p_expresionBooleano(p):
     '''expresionBooleano : TRUE
@@ -335,10 +336,10 @@ def p_content(p):
                | PUNTO
                | PUNTOPUNTO
                | comparador
-               | SYMBOL
                | COMA
                | PUNTOCOMA
                | DOSPUNTOS
+               | IGUAL
                | content content'''
 
 def p_error(p):
@@ -346,5 +347,5 @@ def p_error(p):
     try:
         message = "Syntax Error at line " + str(p.lineno) + "." + " at token " + p.value
     except:
-        message = "Syntax Error"
+        message = "Syntax Error."
     errors.append(message)

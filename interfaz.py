@@ -30,7 +30,7 @@ def presentErrors(errors, messageOK):
 
 def lexer():
     data = textFld.get("1.0", 'end-1c')
-
+    analizador_lexico.errors.clear()
     if len(data) == 0:
         presentErrors(analizador_lexico.errors, "Please enter code before validating.")
     else:

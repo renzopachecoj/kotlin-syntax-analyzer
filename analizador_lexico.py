@@ -73,7 +73,6 @@ simbolos = [
     'PUNTOCOMA',
     'COMA',
     "SIGNODOLAR",
-    "SYMBOL",
     "COMDOBLE"
 ]
 
@@ -112,7 +111,6 @@ t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
 t_SIGNODOLAR = r"\$"
-t_SYMBOL = r'[#%\'@[\\\]^_~]'
 t_COMDOBLE = r'"'
 # t_FLOTANTEEXPRESION = r'\d+(\.\d+)?f'
 
