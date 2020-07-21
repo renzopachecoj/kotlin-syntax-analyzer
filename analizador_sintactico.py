@@ -32,7 +32,7 @@ def p_print(p):
 
 def p_print_error(p):
     'print : printType APAR error CPAR'
-    message = "Bad expression '" + str(p[3].value) + "' in function print. The content can be" \
+    message = "Bad expression in function print. The content can be" \
                 " a string between double quotes, example: print(\"hello Word\") or a function call."
     errors.append(message)
 
@@ -42,7 +42,8 @@ def p_printType(p):
                  | PRINTLN'''
 
 def p_funcion(p):
-    '''funcion : funcionCompare'''
+    '''funcion : funcionCompare
+               | funcionGet'''
 
 def p_funcion_compare(p):
     'funcionCompare : CADENAEXPRESION PUNTO COMPARETO APAR CADENAEXPRESION CPAR'
@@ -53,23 +54,28 @@ def p_funcion_string_compare_error(p):
                                                        " between \". \"String\".compareTo(\"String\")."
     errors.append(message)
 
-def p_funcion_string_getindex(p):
-    'funcion : CADENAEXPRESION PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
+def p_funcion_string_get(p):
+    'funcionGet : CADENAEXPRESION PUNTO GET APAR ENTEROEXPRESION CPAR'
+
+def p_funcion_string_getindex_error(p):
+    'funcionGet : CADENAEXPRESION PUNTO GET APAR error CPAR'
+    message = "Bad expression '" + str(p[5].value) + "' in function get. The paramenter must be an integer" \
+                                                     ". Example: \"String\".get(1)."
+    errors.append(message)
 
 def p_funcion_string_hash(p):
     'funcion : CADENAEXPRESION PUNTO HASHCODE APAR CPAR'
 
 def p_funcion_contains(p):
     '''funcion : ID PUNTO CONTAINS APAR factorEspecial CPAR
-               | ID PUNTO CONTAINS APAR ID CPAR'''
+               | ID PUNTO CONTAINS APAR ID CPAR
+               | ID PUNTO SIZE'''
 
-def p_funcion_Getindex(p):
-    'funcion : ID PUNTO GETINDEX APAR ENTEROEXPRESION CPAR'
+def p_funcion_Get(p):
+    'funcion : ID PUNTO GET APAR ENTEROEXPRESION CPAR'
 
 def p_funcion_list_set(p):
-    '''funcion : ID PUNTO SIZE APAR CPAR
-               | ID PUNTO GET APAR CPAR
-               | ID PUNTO SET APAR factorEspecial CPAR'''
+    '''funcion : ID PUNTO SET APAR factorEspecial CPAR'''
 
 def p_funcion_set(p):
     'funcion : ID PUNTO ISEMPTY APAR CPAR'
@@ -296,6 +302,9 @@ def p_content(p):
                | PUNTOPUNTO
                | comparador
                | SYMBOL
+               | COMA
+               | PUNTOCOMA
+               | DOSPUNTOS
                | content content'''
 
 def p_error(p):
