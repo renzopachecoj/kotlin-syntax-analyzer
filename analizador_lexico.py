@@ -86,7 +86,6 @@ tokens = ["ID"] + list(valores)\
 
 t_IGUAL = r'='
 t_IGUALIGUAL = r'=='
-t_TRIPLEIGUAL = r'==='
 t_NOIGUAL = r'!='
 t_NEGACION = r'!'
 t_MAYOR = r'>'

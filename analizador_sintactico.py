@@ -139,17 +139,11 @@ def p_valor(p):
              | expresion
              | ID
              | if
-             | NEGACION ID
-             | NEGACION expresionBooleano'''
+             | NEGACION ID'''
 
 def p_expresionBooleano(p):
     '''expresionBooleano : TRUE
                         | FALSE'''
-
-def p_expresionBooleano(p):
-    'expresionBooleano : error'
-    message = "Unresolved reference: %s. Value should be true or false"%p[1].value
-    errors.append(message)
 
 def p_flotante(p):
     '''flotante : ENTEROEXPRESION F
