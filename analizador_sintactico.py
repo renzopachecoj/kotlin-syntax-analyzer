@@ -1,5 +1,4 @@
 import ply.lex as lex
-import ply.yacc as yacc
 import analizador_lexico
 
 errors = []
@@ -31,7 +30,9 @@ def p_print(p):
 
 def p_print_error(p):
     'print : printType APAR error CPAR'
-    print("\tBad expression '%s' in function print. The string is stablish between \"\"" %(p[3].value))
+    message = "\tBad expression '" + str(p[3].value) + "' in function print. The content can be a string" \
+                "\n\tbetween \" print(\"hello Word!\") or a function call."
+    errors.append(message)
 
 
 def p_printType(p):
@@ -233,7 +234,8 @@ def p_compmiembro(p):
 
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
-                | compmiembro comparador compmiembro conector compmiembro comparador compmiembro
+                | NEGACION compmiembro comparador compmiembro
+                | condicion conector condicion
     '''
 
 def p_control(p):
@@ -273,8 +275,7 @@ def p_while(p):
 def p_error(p):
     message = ""
     try:
-        message = "Syntax Error at line %d." %(p.lineno)
+        message = "Syntax Error at line " + str(p.lineno) + "."
     except:
-        message = "Error de sintaxis"
+        message = "Syntax Error"
     errors.append(message)
-

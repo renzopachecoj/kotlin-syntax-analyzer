@@ -9,15 +9,10 @@ reservados = {
     'while': 'WHILE',
     'if': 'IF',
     'else': 'ELSE',
-    'break': 'BREAK',
-    #'outer': 'OUTER',
-    #'continue': 'CONTINUE',
     'in': 'IN',
     'until': 'UNTIL',
     'step': 'STEP',
     'downTo': 'DOWNTO',
-    #'index': 'INDEX',
-    'fun': 'FUN',
     'f' : 'F'
 }
 
@@ -36,21 +31,20 @@ funciones = {
     'print': 'PRINT',
     'println': 'PRINTLN',
     'indices': 'INDICES',
-    'main': 'MAIN',
     'indexOf': 'INDEXOF',
     'listOf': 'LISTOF',
     'setOf': 'SETOF'
 }
 
 variables = {
-    'Int' : 'INT',
-    'Float' : 'FLOAT',
-    'Boolean' : 'BOOLEAN',
-    'String' : 'STRING',
-    'List' : 'LIST',
-    'Set' : 'SET',
-    'Pair' : 'PAIR',
-    'Triple' : 'TRIPLE'
+    'Int': 'INT',
+    'Float': 'FLOAT',
+    'Boolean': 'BOOLEAN',
+    'String': 'STRING',
+    'List': 'LIST',
+    'Set': 'SET',
+    'Pair': 'PAIR',
+    'Triple': 'TRIPLE'
 }
 
 simbolos = [
@@ -74,28 +68,19 @@ simbolos = [
     'CPAR',
     'ALLAVE',
     'CLLAVE',
-    'ACOR',
-    'CCOR',
     'PUNTO',
     'DOSPUNTOS',
     'PUNTOPUNTO',
     'PUNTOCOMA',
     'COMA',
-    'ARROBA',
-    'COMSIMPLE',
-    'COMDOBLE',
-    'SIGNODOLAR',
-    'INICIOCOMENTARIO',
-    'PREGUNTA'
+    "COMDOBLE"
 ]
 
 valores = ["ENTEROEXPRESION",
            "CADENAEXPRESION"]
 
-comentarios = ["COMENTARIOMULTILINEA",
-               "COMENTARIOSIMPLE"]
 
-tokens = ["ID"] + list(comentarios) + list(valores)\
+tokens = ["ID"] + list(valores)\
          + list(reservados.values()) + list(simbolos)  \
          + list(funciones.values()) + list(variables.values()) \
 
@@ -122,20 +107,12 @@ t_APAR = r'\('
 t_CPAR = r'\)'
 t_ALLAVE = r'{'
 t_CLLAVE = r'}'
-t_ACOR = r'\['
-t_CCOR = r'\]'
 t_PUNTO = r'\.'
 t_PUNTOPUNTO = r'\.\.'
 t_DOSPUNTOS = r':'
 t_PUNTOCOMA = r';'
 t_COMA = r','
-t_ARROBA = r'@'
-t_SIGNODOLAR = r'\$'
-t_INICIOCOMENTARIO = r'//'
-t_PREGUNTA = r'\?'
-
-t_COMSIMPLE = r'\''
-t_COMDOBLE = r'\"'
+t_COMDOBLE = r'"'
 
 # t_FLOTANTEEXPRESION = r'\d+(\.\d+)?f'
 
@@ -161,7 +138,7 @@ def t_ENTEROEXPRESION(t):
     return t
 
 def t_CADENAEXPRESION(t):
-    r'\".*?\"'
+    r'^\".*?\"$'
     t.value = t.value[1:-1] # remuevo las comillas
     return t
 
@@ -174,18 +151,8 @@ def t_CADENAEXPRESION(t):
 #         t.value = 0
 #     return t
 
-# Comentario de múltiples líneas /* .. */
-def t_COMENTARIOMULTILINEA(t):
-    r'/\*(.|\n)*?\*/'
-    t.lexer.lineno += t.value.count('\n')
-
-# Comentario simple // ...
-def t_COMENTARIOSIMPLE(t):
-    r'//.*\n'
-    t.lexer.lineno += 1
-
 def t_error(t):
-    message = "No se ha reconocido '" + t.value[0] + "'" + " en la línea " + str(t.lineno)
+    message = "Lexical Error. Unknown token '" + t.value[0] + "'" + " at line " + str(t.lineno) + "."
     #print("No se ha reconocido '%s'"%t.value[0])
     errors.append(message)
     t.lexer.skip(1)
