@@ -50,7 +50,6 @@ variables = {
 simbolos = [
     'IGUAL',
     'IGUALIGUAL',
-    'TRIPLEIGUAL',
     'NOIGUAL',
     'NEGACION',
     'MAYOR',

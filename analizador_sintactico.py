@@ -146,21 +146,55 @@ def p_expresionBooleano(p):
     '''expresionBooleano : TRUE
                         | FALSE'''
 
+def p_expresionBooleano(p):
+    'expresionBooleano : error'
+    message = "Unresolved reference: %s. Value should be true or false"%p[1].value
+    errors.append(message)
+
 def p_flotante(p):
     '''flotante : ENTEROEXPRESION F
                 | ENTEROEXPRESION PUNTO ENTEROEXPRESION F'''
 
+def p_flotante_error(p):
+    'flotante : ENTEROEXPRESION error F'
+    message = "Unresolved reference: %s. Value should be [number].[number]f or [number]f"%p[2].value
+    errors.append(message)
+
 def p_list(p):
     'list : LISTOF APAR contenido CPAR'
+
+def p_list_error(p):
+    'list : LISTOF APAR error CPAR'
+    message = "Can't asign %s to list in function listOf. Elements should be of type Int, Float, \nBoolean, List," \
+              + "Set, Pair or Triple and separated by ','."%p[3].value
+    errors.append(message)
 
 def p_set(p):
     'set : SETOF APAR contenido CPAR'
 
+def p_set_error(p):
+    'set : LISTOF APAR error CPAR'
+    message = "Can't asign %s to list in function setOf. Elements should be of type Int, Float, \nBoolean, List," \
+              + "Set, Pair or Triple and separated by ','."%p[3].value
+    errors.append(message)
+
 def p_pair(p):
     'pair : PAIR APAR factorEspecial COMA factorEspecial CPAR'
 
+def p_pair_error(p):
+    'pair : LISTOF APAR error CPAR'
+    message = "Can't asign %s to list in constructor Pair. Both elements should be of type Int, Float, \nBoolean, List," \
+              + "Set, Pair or Triple and separated by ','."%p[3].value
+    errors.append(message)
+
 def p_triple(p):
     'triple : TRIPLE APAR factorEspecial COMA factorEspecial COMA factorEspecial CPAR'
+
+def p_triple_error(p):
+    'triple : LISTOF APAR error CPAR'
+    message = "Can't asign %s to list in constructor Triple. All of three elements should be of type Int, Float, \nBoolean, List," \
+              + "Set, Pair or Triple and separated by ','."%p[3].value
+    errors.append(message)
 
 def p_contenido(p):
     '''contenido : factorEspecial
@@ -231,7 +265,6 @@ def p_factor_expr(p):
 
 def p_comparador(p):
     '''comparador : IGUALIGUAL 
-                | TRIPLEIGUAL 
                 | NOIGUAL 
                 | MAYOR 
                 | MENOR 
@@ -246,15 +279,17 @@ def p_conector(p):
 
 def p_compmiembro(p):
     '''compmiembro : ID
+                    | CADENAEXPRESION
                     | ENTEROEXPRESION
                     | funcion
-                    | asignacion
+                    | NEGACION compmiembro
     '''
 
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
-                | NEGACION compmiembro comparador compmiembro
                 | condicion conector condicion
+                | APAR condicion CPAR
+                | NEGACION condicion
     '''
 
 def p_control(p):
