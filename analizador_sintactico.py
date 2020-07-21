@@ -279,12 +279,18 @@ def p_compmiembro(p):
                     | expresionBooleano
                     | NEGACION compmiembro
     '''
-
+def p_compsolo(p):
+    '''compsolo : ID
+                | expresionBooleano
+                | funcion
+                | NEGACION compsolo
+    '''
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
-                | condicion conector condicion
-                | APAR condicion CPAR
+                | compsolo
                 | NEGACION condicion
+                | condicion conector condicion
+                | APAR condicion CPAR 
     '''
 
 def p_control(p):
