@@ -259,7 +259,6 @@ def p_factor_expr(p):
 
 def p_comparador(p):
     '''comparador : IGUALIGUAL 
-                | TRIPLEIGUAL 
                 | NOIGUAL 
                 | MAYOR 
                 | MENOR 
@@ -274,15 +273,17 @@ def p_conector(p):
 
 def p_compmiembro(p):
     '''compmiembro : ID
+                    | CADENAEXPRESION
                     | ENTEROEXPRESION
                     | funcion
-                    | asignacion
+                    | NEGACION compmiembro
     '''
 
 def p_condicion(p):
     '''condicion : compmiembro comparador compmiembro
-                | NEGACION compmiembro comparador compmiembro
                 | condicion conector condicion
+                | APAR condicion CPAR
+                | NEGACION condicion
     '''
 
 def p_control(p):
