@@ -173,7 +173,7 @@ def p_set_error(p):
     errors.append(message)
 
 def p_pair(p):
-    'pair : PAIR APAR factorEspecial COMA factorEspecial CPAR'
+    'pair : PAIR APAR valor COMA valor CPAR'
 
 def p_pair_error(p):
     'pair : LISTOF APAR error CPAR'
@@ -182,7 +182,7 @@ def p_pair_error(p):
     errors.append(message)
 
 def p_triple(p):
-    'triple : TRIPLE APAR factorEspecial COMA factorEspecial COMA factorEspecial CPAR'
+    'triple : TRIPLE APAR valor COMA valor COMA valor CPAR'
 
 def p_triple_error(p):
     'triple : LISTOF APAR error CPAR'
@@ -191,8 +191,8 @@ def p_triple_error(p):
     errors.append(message)
 
 def p_contenido(p):
-    '''contenido : factorEspecial
-                 | factorEspecial COMA contenido'''
+    '''contenido : valor
+                 | valor COMA contenido'''
 
 def p_expresion_suma(p):
     'expresion : expresion SUMA termino'
@@ -231,12 +231,7 @@ def p_termino_factor(p):
     'termino : factor'
 
 def p_termino_factorEspecial(p):
-    '''termino : ENTEROEXPRESION
-               | flotante
-               | CADENAEXPRESION
-               | list
-               | set
-               | ID'''
+    '''termino : factorEspecial'''
 
 def p_factor_num(p):
     'factor : ENTEROEXPRESION'
@@ -251,7 +246,10 @@ def p_factorEspecial(p):
     '''factorEspecial : factor
                | CADENAEXPRESION
                | list
-               | set'''
+               | set
+               | ENTEROEXPRESION
+               | flotante
+               | ID'''
 
 def p_factor_expr(p):
     'factor : APAR expresion CPAR'
